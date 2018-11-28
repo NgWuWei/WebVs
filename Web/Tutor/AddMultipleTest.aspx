@@ -41,7 +41,7 @@
     <br />
    
         TEST NAME     : 
-        <asp:Label ID="tNlbl" runat="server"></asp:Label>
+        <asp:Label ID="testNamelbl" runat="server"></asp:Label>
     <br /><br />
         QUESTION TYPE : 
         <asp:Label ID="qtlbl" runat="server"></asp:Label>

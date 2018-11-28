@@ -13,13 +13,13 @@ namespace Web.Tutor {
     public partial class AddMultipleTest {
         
         /// <summary>
-        /// tNlbl control.
+        /// testNamelbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tNlbl;
+        protected global::System.Web.UI.WebControls.Label testNamelbl;
         
         /// <summary>
         /// qtlbl control.

@@ -15,15 +15,21 @@ namespace Web.Tutor
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
+            ContentPlaceHolder mpContentPlaceHolder;
+            TextBox testNametxt;
+            DropDownList QType;
+            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
+            if (mpContentPlaceHolder != null)
             {
-                TextBox txt1 = PreviousPage.FindControl("txtTestName") as TextBox;
-                DropDownList ddl1 = PreviousPage.FindControl("QuestionTypeList") as DropDownList;
-
-                tNlbl.Text = " " + txt1.Text + "<br />";
-                qtlbl.Text = " " + ddl1.SelectedItem.Value + "<br />";
-
+                testNametxt = (TextBox)mpContentPlaceHolder.FindControl("txtTestName");
+                if (testNametxt != null)
+                {
+                    testNamelbl.Text = testNamelbl.Text;
+                }
             }
+
+
+           
 
 
         //Session["GroupName"] = txtGroupName.Text;
