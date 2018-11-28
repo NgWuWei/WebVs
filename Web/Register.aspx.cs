@@ -40,23 +40,30 @@ namespace Web {
                 connection.Open();
 
                 // check if email exists
-                SqlCommand cmd = new SqlCommand("select studEmail from Students where studEmail = '" + regEmail.Text+"'", connection);
+                SqlCommand cmd = new SqlCommand("select studEmail from Students where studEmail = @email", connection);
+                cmd.Parameters.AddWithValue("@email", regEmail.Text);
                 if (regEmail.Text == cmd.ExecuteScalar() as string) {
                     errMsg.Text = "This email is already been used by an account!\n";
                     throw new ArgumentException();
                 }
-
-                // count table and create custom id out of birthdate eg 19 00000
-                cmd.CommandText = "select count(*) from students";
-                int regId = Math.Abs(Int32.Parse(regBirthDate.Text.Substring(8, 2)) * 100000 + Convert.ToInt32(cmd.ExecuteScalar()));
+                
+                // count table to check table is empty
+                cmd.CommandText = "select count(*) from Students";
+                if (Convert.ToInt32(cmd.ExecuteScalar()) == 0) {
+                    // create custom id out of birthdate eg 19 00000
+                    int regId = Math.Abs((Int32.Parse(regBirthDate.Text.Substring(8, 2)) * 100000) + Convert.ToInt32(cmd.ExecuteScalar()));
+                    // insert unique id before insert data
+                    cmd.CommandText = "SET IDENTITY_INSERT dbo.Students ON;" +
+                                      "insert into Students (studId) values (@id)" +
+                                      "SET IDENTITY_INSERT dbo.Students ON;";
+                    // UNDONE debug needed here plsssssss
+                    cmd.Parameters.AddWithValue("@id", regId);
+                }
 
                 // insert data
-                cmd.CommandText = "SET IDENTITY_INSERT dbo.Students ON;"+
-                                  "insert into Students (studId, studName, studEmail, studPass, studGender, studBirthdate, studGrade) " +
-                                  "values (@id, @name, @email, @pass, @gender, @birthdate, NULL);"+
-                                  "SET IDENTITY_INSERT dbo.Students ON;";
+                cmd.CommandText = "insert into Students (studName, studEmail, studPass, studGender, studBirthdate, studGrade) " +
+                                  "values (@name, @email, @pass, @gender, @birthdate, NULL);";
                 // pass in parameters
-                cmd.Parameters.AddWithValue("@id", regId);
                 cmd.Parameters.AddWithValue("@name", regName.Text);
                 cmd.Parameters.AddWithValue("@email", regEmail.Text);
                 cmd.Parameters.AddWithValue("@pass", regPass.Text);

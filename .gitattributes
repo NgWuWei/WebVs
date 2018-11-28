@@ -30,6 +30,10 @@ core.autocrlf=true
 *.sqlproj   merge=binary
 *.wwaproj   merge=binary
 
+#merging database
+*.mdf       merge=binary
+*.ldf       merge=binary
+
 # Custom for Visual Studio
 *.suo 	-text -diff
 *.snk 	-text -diff
