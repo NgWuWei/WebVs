@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode url="~/Tutor/Tutor.aspx" title="Tutor"  description="Accessible by tutors">
+    <siteMapNode url="~/Tutor/Assessment.aspx" title="Assessment Page" description="Modify Assessment">
+      <siteMapNode url="~/Tutor/AddMultipleTest.aspx" title="Add Tests"  description="Add Tests" />
+      <siteMapNode url="~/Tutor/AddTestMenu.aspx" title="Test Menu"  description="Test Menu" />
+      <siteMapNode url="~/Tutor/SelectedTestMenu.aspx" title="Select Tests" description="Select Tests" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
