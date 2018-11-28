@@ -79,6 +79,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Menu.aspx" />
+    <Content Include="Tutor\AssignTestPart2.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="picture\1.png" />
     <None Include="picture\2.png" />
@@ -101,7 +102,7 @@
     <Content Include="Tutor\Assessment.aspx" />
     <Content Include="Tutor\AddTestMenu.aspx" />
     <Content Include="Tutor\AddGroupDetails.aspx" />
-    <Content Include="Tutor\AssignTest.aspx" />
+    <Content Include="Tutor\AssignTestPart1.aspx" />
     <Content Include="Tutor\TestMenu.aspx" />
     <Content Include="Tutor\Tutor.aspx" />
     <Content Include="Tutor\ViewRecords.aspx" />
@@ -194,12 +195,19 @@
     <Compile Include="Tutor\AddGroupDetails.aspx.designer.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tutor\AssignTest.aspx.cs">
-      <DependentUpon>AssignTest.aspx</DependentUpon>
+    <Compile Include="Tutor\AssignTestPart1.aspx.cs">
+      <DependentUpon>AssignTestPart1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Tutor\AssignTest.aspx.designer.cs">
-      <DependentUpon>AssignTest.aspx</DependentUpon>
+    <Compile Include="Tutor\AssignTestPart1.aspx.designer.cs">
+      <DependentUpon>AssignTestPart1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor\AssignTestPart2.aspx.cs">
+      <DependentUpon>AssignTestPart2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor\AssignTestPart2.aspx.designer.cs">
+      <DependentUpon>AssignTestPart2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutor\TestMenu.aspx.cs">
       <DependentUpon>TestMenu.aspx</DependentUpon>

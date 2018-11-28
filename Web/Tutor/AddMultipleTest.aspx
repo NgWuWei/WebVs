@@ -72,18 +72,7 @@
                 <asp:TextBox ID="QuestionTxt" runat="server" CssClass="auto-style9" Height="126px" Width="535px"></asp:TextBox>
                 <br />
                 <asp:Label ID="mulquestionResultlbl" runat="server" Text="Please Select the Marks: "></asp:Label>
-                <asp:DropDownList ID="ddlEachMarks" runat="server" CssClass="auto-style16" Height="16px" Width="52px">
-                    <asp:ListItem>1</asp:ListItem>
-                    <asp:ListItem>2</asp:ListItem>
-                    <asp:ListItem>3</asp:ListItem>
-                    <asp:ListItem>4</asp:ListItem>
-                    <asp:ListItem>5</asp:ListItem>
-                    <asp:ListItem>6</asp:ListItem>
-                    <asp:ListItem>7</asp:ListItem>
-                    <asp:ListItem>8</asp:ListItem>
-                    <asp:ListItem>9</asp:ListItem>
-                    <asp:ListItem>10</asp:ListItem>
-                </asp:DropDownList>
+                <asp:TextBox TextMode="Number" runat="server" min="1" max="20" step="1"/>
                 <br />
 
             </td>

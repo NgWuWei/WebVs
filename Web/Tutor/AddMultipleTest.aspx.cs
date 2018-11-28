@@ -76,7 +76,7 @@ namespace Web.Tutor
         protected void savebtn_Click(object sender, EventArgs e) {
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
-            string insertQuery1 = "INSERT into MultiQuestion(TestID, TestName, QuestionType, QuestionDesc, QuestionResult, AnswerCorrect) values (@TestID, @TestName, @QuestionType, @QuestionDesc, @QuestionResult, @AnswerCorrect)";
+            string insertQuery1 = "INSERT into Assessment(asID, asName, asQuestionType, asTotalMarks) values (@asID, @asName, @asQuestionType, @asTotalMarks )";
             string insertQuery2 = "INSERT into MultiQuestionDetails(TestID, AnswerDesc, AnswerLabel )values (@TestID, @AnswerDesc, @AnswerLabel)";
 
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);

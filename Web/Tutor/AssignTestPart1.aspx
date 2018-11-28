@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AssignTest.aspx.cs" Inherits="Web.Tutor.AssignTest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AssignTestPart1.aspx.cs" Inherits="Web.Tutor.AssignTest" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
@@ -19,7 +19,7 @@
                 <br />
                 <hr />
                 <br />
-                <asp:Button ID="createnewbtn" runat="server" Text="Create New Group" OnClick="createnewbtn_Click" />
+                <asp:Button ID="createnewbtn" runat="server" Text="Create New Group"  />
             </td>
         </tr>
     </table>

@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Tutor
-{
-
-
-    public partial class AssignTestPart2
-    {
+namespace Web.Tutor {
+    
+    
+    public partial class AssignTestPart2 {
     }
 }
