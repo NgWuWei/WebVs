@@ -10,10 +10,9 @@
     <div><h1>Student
          </h1></div>
     <div>
-        <asp:HyperLink runat="server" NavigateUrl="~/Student/StudentAssessment.aspx"></asp:HyperLink>
+        <asp:HyperLink runat="server" NavigateUrl="~/Student/StudentAssessment.aspx">Check Assessments</asp:HyperLink>
         <br />
-        <asp:HyperLink runat="server" NavigateUrl="~/Student/ViewAssessment.aspx"> View assessment</asp:HyperLink>
-        &nbsp;
-        &nbsp;
+        <asp:HyperLink runat="server" NavigateUrl="~/Student/ViewAssessment.aspx">View Assessment</asp:HyperLink>
+        <br />
     </div>
 </asp:Content>

@@ -11,56 +11,51 @@ namespace Web.Tutor
 {
     public partial class AddMultipleTest : System.Web.UI.Page
     {
-        
+        protected void Page_Load(object sender, EventArgs e) {
+            //ContentPlaceHolder mpContentPlaceHolder;
+            //TextBox testNametxt;
+            //DropDownList QType;
+            //mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.FindControl("body");
+            //if (mpContentPlaceHolder != null) {
+            //    testNametxt = (TextBox)mpContentPlaceHolder.FindControl("txtTestName");
+            //    if (testNametxt != null) {
+            //        testNamelbl.Text = testNamelbl.Text;
+            //    }
+            //}
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            ContentPlaceHolder mpContentPlaceHolder;
-            TextBox testNametxt;
-            DropDownList QType;
-            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
-            if (mpContentPlaceHolder != null)
-            {
-                testNametxt = (TextBox)mpContentPlaceHolder.FindControl("txtTestName");
-                if (testNametxt != null)
-                {
-                    testNamelbl.Text = testNamelbl.Text;
-                }
+            if (PreviousPage != null && PreviousPage.IsCrossPagePostBack) {
+                TextBox tb = PreviousPage.FindControl("body").FindControl("txtTestName") as TextBox;
+                if (tb != null)
+                    testNamelbl.Text = tb.Text;
             }
 
-        //Session["GroupName"] = txtGroupName.Text;
-        // Session["TestName"] = txtTestName.Text;
 
-        // Session["TestType"] = QuestionTypeList.SelectedItem.Value;
+                //Session["GroupName"] = txtGroupName.Text;
+                // Session["TestName"] = txtTestName.Text;
 
-         }
+                // Session["TestType"] = QuestionTypeList.SelectedItem.Value;
+            
+        }
 
         static int i = 0;
         static int questionNumber = 1;
-
+        
         Label mulquestionlbl = new Label();
 
         protected void AddAnswerOptionbtn_Click(object sender, EventArgs e)
         {
-            TextBox mulquestiontb;
-            Label mulquestionResultlbl;
-            Label mulquestionlbl2;
-            CheckBox cbox;
-
             i++;
             for (int j = 0; j < i; j++)
             {
-                mulquestiontb = new TextBox();
-                mulquestionlbl = new Label();
+                TextBox mulquestiontb = new TextBox();
+                Label mulquestionlbl = new Label();
 
-                mulquestionResultlbl = new Label();
-                mulquestionlbl2 = new Label();
+                Label mulquestionResultlbl = new Label();
+                Label mulquestionlbl2 = new Label();
 
                 // checkbox id = body_cbox_{}
-                cbox = new CheckBox
-                {
-                    ID = "cbox_" + j
-                };
+                RadioButton radio = new RadioButton();
+                radio.ID = "rb_" + j;
 
                 /// TODO checkbox list dynamic control
                 mulquestiontb.ID = j.ToString();
@@ -74,9 +69,8 @@ namespace Web.Tutor
                 PlaceHolder1.Controls.Add(mulquestiontb);
 
                 PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-                //PlaceHolder1.Controls.Add(cbox);
+                PlaceHolder1.Controls.Add(radio);
                 //PlaceHolder1.Controls.Add(optionlbl);
-                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
 
             }
             CorrectAnswerddl.Items.Add(mulquestionlbl.Text);
@@ -130,9 +124,7 @@ namespace Web.Tutor
                 cmd.Parameters.AddWithValue("@mqdAnswerLabel", mulquestionlbl.Text);
                 cmd.ExecuteNonQuery();
             }
-
-
-
+            
             conn.Close();
 
             QuestionNolbl.Text = questionNumber.ToString();

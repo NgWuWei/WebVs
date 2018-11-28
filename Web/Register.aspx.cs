@@ -30,12 +30,11 @@ namespace Web {
             TextBox regPass = (TextBox)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("Password");
             RadioButtonList regGender = (RadioButtonList)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("Gender");
             TextBox regBirthDate = (TextBox)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("BirthDate");
-            DropDownList regDept = (DropDownList)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("Department");
+            DropDownList regCourse = (DropDownList)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("Course");
             
             // open connection for database
             try {
                 string str = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                //string str = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\Web\\Web\\App_Data\\Database1.mdf;Integrated Security=True";
                 SqlConnection connection = new SqlConnection(str);
                 connection.Open();
 
@@ -69,7 +68,7 @@ namespace Web {
                 cmd.Parameters.AddWithValue("@pass", regPass.Text);
                 cmd.Parameters.AddWithValue("@gender", regGender.SelectedValue);
                 cmd.Parameters.AddWithValue("@birthdate", regBirthDate.Text);
-                //cmd.Parameters.AddWithValue("@dept", regDept.SelectedValue);      // TODO LINK DEPARTMENT ID , LINK DATABASE WITH DROPDOWNLIST
+                //cmd.Parameters.AddWithValue("@course", regCourse.SelectedValue);      // TODO LINK Course ID , LINK DATABASE WITH DROPDOWNLIST
                 cmd.ExecuteNonQuery();
 
                 // close database

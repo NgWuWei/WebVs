@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="TestDetailsMenu.aspx.cs" Inherits="Web.Tutor.TestMenu1" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="TestDetailsMenu.aspx.cs" Inherits="Web.Tutor.TestDetailsMenu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
@@ -94,7 +94,7 @@
                         <asp:ImageButton ImageUrl="~/Resources/cancel.png" runat="server" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px"/>
                     </EditItemTemplate>
                     <FooterTemplate>
-                            <asp:ImageButton ImageUrl="~/Resources/addnew.png" runat="server" NavigateUrl="~/Tutor/AddTestMenu.aspx" ToolTip="Add New" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Resources/addnew.png" runat="server" PostBackUrl="~/Tutor/AddTestMenu.aspx" ToolTip="Add New" Width="20px" Height="20px"/>
                      </FooterTemplate>
                 </asp:TemplateField>
             </Columns>

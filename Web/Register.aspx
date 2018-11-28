@@ -63,6 +63,7 @@
                                     <td>
                                         <asp:TextBox ID="Email" runat="server"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" ErrorMessage="E-mail is required." ToolTip="E-mail is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="emailRegExp" runat="server" ValidationExpression='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' ControlToValidate="Email" ErrorMessage="Missing @email.com format." ToolTip="Please match name@email.com format." ValidationGroup="CreateUserWizard1"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -77,19 +78,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="DepartmentLabel" runat="server" AssociatedControlID="Department">Department:</asp:Label>
+                                        <asp:Label ID="CourseLabel" runat="server" AssociatedControlID="Course">Course:</asp:Label>
                                     </td>
                                     <td>
                                         <!-- Link with datasource after assessment done -->
-                                        <asp:DropDownList ID="Department" runat="server" DataTextField="Department">
-                                            <asp:ListItem Value="1">Faculty of Accountancy, Finance & Business</asp:ListItem>
-                                            <asp:ListItem Value="2">Faculty of Communication & Creative Industries</asp:ListItem>
-                                            <asp:ListItem Value="3">Faculty of Built Environment</asp:ListItem>
-                                            <asp:ListItem Value="4">Faculty of Applied Sciences</asp:ListItem>
-                                            <asp:ListItem Value="5">Faculty of Computing & Information Technology</asp:ListItem>
-                                            <asp:ListItem Value="6">Faculty of Engineering & Technology</asp:ListItem>
+                                        <asp:DropDownList ID="Course" runat="server" DataTextField="Course">
                                         </asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="DepartmentRequired" runat="server" ControlToValidate="Department" ErrorMessage="Department is required." ToolTip="Department is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="CourseRequired" runat="server" ControlToValidate="Course" ErrorMessage="Course is required." ToolTip="Course is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>

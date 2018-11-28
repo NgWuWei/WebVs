@@ -76,7 +76,6 @@
     <Content Include="Tutor\AddMultipleTest.aspx" />
     <Content Include="Tutor\AddTestMenu.aspx" />
     <Content Include="Tutor\AssignTestPart2.aspx" />
-    <Content Include="WebForm1.aspx" />
     <None Include="picture\1.png" />
     <None Include="picture\2.png" />
     <None Include="picture\3.jpg" />
@@ -222,13 +221,6 @@
     </Compile>
     <Compile Include="Tutor\ViewRecords.aspx.designer.cs">
       <DependentUpon>ViewRecords.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
