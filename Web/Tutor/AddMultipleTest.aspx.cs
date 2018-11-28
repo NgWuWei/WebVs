@@ -28,10 +28,6 @@ namespace Web.Tutor
                 }
             }
 
-
-           
-
-
         //Session["GroupName"] = txtGroupName.Text;
         // Session["TestName"] = txtTestName.Text;
 
@@ -102,14 +98,14 @@ namespace Web.Tutor
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
-            string insertQuery1 = "INSERT into Assessment (asName, asQuestionType) values " +
+            string insertQuery1 = "INSERT into Assessments (asName, asQuestionType) values " +
                 "( @asName, @asQuestionType)";
 
-            string insertQuery2 = "INSERT into MultiQuestion( QuestionDesc, EachMarks, CorrectAnswer)values " +
-                "( @QuestionDesc,@EachMarks, @CorrectAnswer)";
+            string insertQuery2 = "INSERT into MultiQuestions( mqQuestionDesc, mqEachMarks, mqCorrectAnswer)values " +
+                "( @mqQuestionDesc, @mqEachMarks, @mqCorrectAnswer)";
 
-            string insertQuery3 = "INSERT into MultiQuestionDetails(EachAnswerDesc, EachAnswerLabel)values " +
-                "( @EachAnswerDesc, @EachAnswerLabel)";
+            string insertQuery3 = "INSERT into MultiQuestionDetail(mqdAnswerDesc, mqdAnswerLabel)values " +
+                "( @mqdAnswerDesc, @mqdAnswerLabel)";
 
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);
 
@@ -119,9 +115,9 @@ namespace Web.Tutor
 
             // second query
             cmd.CommandText = insertQuery2;
-            cmd.Parameters.AddWithValue("@QuestionDesc", QuestionTxt.Text);
-            cmd.Parameters.AddWithValue("@EachMarks", marks);
-            cmd.Parameters.AddWithValue("@CorrectAnswer", CorrectAnswerddl.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@mqQuestionDesc", QuestionTxt.Text);
+            cmd.Parameters.AddWithValue("@mqEachMarks", marks);
+            cmd.Parameters.AddWithValue("@mqCorrectAnswer", CorrectAnswerddl.SelectedItem.Value);
 
             cmd.ExecuteNonQuery();
 
@@ -130,8 +126,8 @@ namespace Web.Tutor
             foreach (TextBox textBox in mulquestiontb.Controls.OfType<TextBox>())
             {
                 cmd.CommandText = insertQuery3;
-                cmd.Parameters.AddWithValue("@EachAnswerDesc", mulquestiontb.Text);
-                cmd.Parameters.AddWithValue("@EachAnswerLabel", mulquestionlbl.Text);
+                cmd.Parameters.AddWithValue("@mqdAnswerDesc", mulquestiontb.Text);
+                cmd.Parameters.AddWithValue("@mqdAnswerLabel", mulquestionlbl.Text);
                 cmd.ExecuteNonQuery();
             }
 

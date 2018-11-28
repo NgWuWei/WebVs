@@ -9,6 +9,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <div><h1>View Assessment Results</h1></div>
     <div>
+        <!-- Get student name , assessment name, student score -->
         <asp:GridView ID="GridView1" runat="server">
         </asp:GridView>
 
