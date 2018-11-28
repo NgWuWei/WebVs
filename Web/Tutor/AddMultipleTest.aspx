@@ -1,7 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AddMultipleTest.aspx.cs" Inherits="Web.Tutor.AddTestDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AddMultipleTest.aspx.cs" Inherits="Web.Tutor.AddMultipleTest" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <style type="text/css">
         .auto-style5 {
             height: 23px;
@@ -31,30 +34,21 @@
         .auto-style14 {
             height: 40px;
         }
-        .auto-style15 {
-            float:right;
-        }
-        .auto-style16 {
-            margin-left: 36px;
-            text-align: center;
-            position:center;
-        }
-        </style>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <br />
-    <br />
-    <br />
-    <p>
-        TEST NAME     : <asp:Label ID="lblTestName" runat="server"></asp:Label>
-    </p>
-    <p>
-        QUESTION TYPE : <asp:Label ID="QuestionTypelbl" runat="server"></asp:Label>
-        <asp:Button ID="Backbtn" runat="server" Text="Return To Test Menu" CssClass="auto-style15"  NavigateUrl="~/Tutor/TestDetailsMenu.aspx"/>
-    </p>
+    </style>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" SelectCommand="SELECT * FROM [MultiQuestion], [MultiQuetsionDetails]"></asp:SqlDataSource>
+    <br />
+    <br />
+    <br />
+   
+        TEST NAME     : 
+        <asp:Label ID="tNlbl" runat="server"></asp:Label>
+    <br /><br />
+        QUESTION TYPE : 
+        <asp:Label ID="qtlbl" runat="server"></asp:Label>
 
+      <div style="float:right">
+        <asp:Button ID="returnbtn" runat="server" Text="Return to test menu" />
+    </div>
     <table class="auto-style8">  
         <tr>
             <td class="auto-style7">Question Entry Options</td>
@@ -72,7 +66,7 @@
                 <asp:TextBox ID="QuestionTxt" runat="server" CssClass="auto-style9" Height="126px" Width="535px"></asp:TextBox>
                 <br />
                 <asp:Label ID="mulquestionResultlbl" runat="server" Text="Please Select the Marks: "></asp:Label>
-                <asp:TextBox TextMode="Number" runat="server" min="1" max="20" step="1"/>
+                <asp:TextBox ID="Markstxt" TextMode="Number" runat="server" min="1" max="20" step="1"/>
                 <br />
 
             </td>
@@ -80,7 +74,7 @@
         <tr>
             <td class="auto-style13">
                 *CORRECT ANSWER : <br />
-                <asp:DropDownList ID ="CorrectAnswerddl"  runat="server"></asp:DropDownList>
+                <asp:DropDownList ID ="CorrectAnswerddl"  runat="server" ></asp:DropDownList>
                 <br />
                 <br />
                 <asp:Button ID="savebtn" runat="server" Text="Save" OnClick="savebtn_Click" />

@@ -7,12 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Web.Tutor
 {
-    public partial class GroupDetails : System.Web.UI.Page
+    public partial class AddGroupDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblGroupName.Text = Session["GroupName"] as String;
-            
+
         }
     }
 }

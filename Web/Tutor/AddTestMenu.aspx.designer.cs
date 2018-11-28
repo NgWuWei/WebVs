@@ -10,7 +10,7 @@
 namespace Web.Tutor {
     
     
-    public partial class TestMenu {
+    public partial class AddTestMenu {
         
         /// <summary>
         /// lblNewTest control.

@@ -10,7 +10,7 @@
 namespace Web.Tutor {
     
     
-    public partial class TestMenu2 {
+    public partial class TestMenu {
         
         /// <summary>
         /// Panel1 control.

@@ -10,43 +10,34 @@
 namespace Web.Tutor {
     
     
-    public partial class AddTestDetails {
+    public partial class AddMultipleTest {
         
         /// <summary>
-        /// lblTestName control.
+        /// tNlbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTestName;
+        protected global::System.Web.UI.WebControls.Label tNlbl;
         
         /// <summary>
-        /// QuestionTypelbl control.
+        /// qtlbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label QuestionTypelbl;
+        protected global::System.Web.UI.WebControls.Label qtlbl;
         
         /// <summary>
-        /// Backbtn control.
+        /// returnbtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Backbtn;
-        
-        /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Button returnbtn;
         
         /// <summary>
         /// QuestionNolbl control.
@@ -74,6 +65,15 @@ namespace Web.Tutor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label mulquestionResultlbl;
+        
+        /// <summary>
+        /// Markstxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Markstxt;
         
         /// <summary>
         /// CorrectAnswerddl control.

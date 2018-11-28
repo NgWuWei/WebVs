@@ -10,7 +10,7 @@
 namespace Web.Tutor {
     
     
-    public partial class AssignTest {
+    public partial class AssignTestPart1 {
         
         /// <summary>
         /// GroupCBL control.
