@@ -97,13 +97,20 @@
                 <asp:LoginStatus ID="LoginStatus1" runat="server" />-->
                 <li class="right"><a href="#">Login/SignUp &#128273</a></li>
             </ul>
-            <asp:ContentPlaceHolder ID="body" runat="server">
-                <!-- UNDONE custom view for this, also move these into tutor master page -->
-                <div ID="SiteMap1">
+
+            <!-- UNDONE custom view for this, also move these into tutor master page -->
+               <div ID="SiteMap1">
                 <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1">
                 </asp:TreeView>
                 <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
                 </div>
+
+            <asp:ContentPlaceHolder ID="body" runat="server">
+                
+            </asp:ContentPlaceHolder>
+
+             <asp:ContentPlaceHolder ID="tail" runat="server">
+                
             </asp:ContentPlaceHolder>
         </div>
     </form>

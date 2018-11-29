@@ -11,51 +11,42 @@ namespace Web.Tutor
 {
     public partial class AddMultipleTest : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e) {
-            //ContentPlaceHolder mpContentPlaceHolder;
-            //TextBox testNametxt;
-            //DropDownList QType;
-            //mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.FindControl("body");
-            //if (mpContentPlaceHolder != null) {
-            //    testNametxt = (TextBox)mpContentPlaceHolder.FindControl("txtTestName");
-            //    if (testNametxt != null) {
-            //        testNamelbl.Text = testNamelbl.Text;
-            //    }
-            //}
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
-            if (PreviousPage != null && PreviousPage.IsCrossPagePostBack) {
-                TextBox tb = PreviousPage.FindControl("body").FindControl("txtTestName") as TextBox;
-                if (tb != null)
-                    testNamelbl.Text = tb.Text;
-            }
+           
 
-
-                //Session["GroupName"] = txtGroupName.Text;
-                // Session["TestName"] = txtTestName.Text;
-
-                // Session["TestType"] = QuestionTypeList.SelectedItem.Value;
-            
         }
 
+      
         static int i = 0;
         static int questionNumber = 1;
-        
+
         Label mulquestionlbl = new Label();
 
         protected void AddAnswerOptionbtn_Click(object sender, EventArgs e)
         {
+           
+
+            TextBox mulquestiontb;
+            Label mulquestionResultlbl;
+            Label mulquestionlbl2;
+            CheckBox cbox;
+
             i++;
             for (int j = 0; j < i; j++)
             {
-                TextBox mulquestiontb = new TextBox();
-                Label mulquestionlbl = new Label();
+                mulquestiontb = new TextBox();
+                mulquestionlbl = new Label();
 
-                Label mulquestionResultlbl = new Label();
-                Label mulquestionlbl2 = new Label();
+                mulquestionResultlbl = new Label();
+                mulquestionlbl2 = new Label();
 
                 // checkbox id = body_cbox_{}
-                RadioButton radio = new RadioButton();
-                radio.ID = "rb_" + j;
+                cbox = new CheckBox
+                {
+                    ID = "cbox_" + j
+                };
 
                 /// TODO checkbox list dynamic control
                 mulquestiontb.ID = j.ToString();
@@ -69,8 +60,9 @@ namespace Web.Tutor
                 PlaceHolder1.Controls.Add(mulquestiontb);
 
                 PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-                PlaceHolder1.Controls.Add(radio);
+                //PlaceHolder1.Controls.Add(cbox);
                 //PlaceHolder1.Controls.Add(optionlbl);
+                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
 
             }
             CorrectAnswerddl.Items.Add(mulquestionlbl.Text);
@@ -80,6 +72,8 @@ namespace Web.Tutor
 
         protected void savebtn_Click(object sender, EventArgs e)
         {
+           
+
             TextBox mulquestiontb = new TextBox();
             //mulquestiontb.FindControl("body_" + i);
             // TODO get multiquestion id with numbers body_{}
@@ -92,19 +86,19 @@ namespace Web.Tutor
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
-            string insertQuery1 = "INSERT into Assessments (asName, asQuestionType) values " +
+            string insertQuery1 = "INSERT into Assessment (asName, asQuestionType) values " +
                 "( @asName, @asQuestionType)";
 
-            string insertQuery2 = "INSERT into MultiQuestions( mqQuestionDesc, mqEachMarks, mqCorrectAnswer)values " +
-                "( @mqQuestionDesc, @mqEachMarks, @mqCorrectAnswer)";
+            string insertQuery2 = "INSERT into MultiQuestions( QuestionDesc, EachMarks, CorrectAnswer)values " +
+                "( @QuestionDesc,@EachMarks, @CorrectAnswer)";
 
-            string insertQuery3 = "INSERT into MultiQuestionDetail(mqdAnswerDesc, mqdAnswerLabel)values " +
-                "( @mqdAnswerDesc, @mqdAnswerLabel)";
+            string insertQuery3 = "INSERT into MultiQuestionDetails(EachAnswerDesc, EachAnswerLabel)values " +
+                "( @EachAnswerDesc, @EachAnswerLabel)";
 
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);
 
-           // cmd.Parameters.AddWithValue("@asName", testNamelbl.Text);
-           // cmd.Parameters.AddWithValue("@asQuestionType", questionTypelbl.Text);
+           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
+          /// cmd.Parameters.AddWithValue("@asQuestionType", questionTypelbl.Text);
 
 
             // second query
@@ -124,7 +118,9 @@ namespace Web.Tutor
                 cmd.Parameters.AddWithValue("@mqdAnswerLabel", mulquestionlbl.Text);
                 cmd.ExecuteNonQuery();
             }
-            
+
+
+
             conn.Close();
 
             QuestionNolbl.Text = questionNumber.ToString();
@@ -138,6 +134,18 @@ namespace Web.Tutor
 
         protected void returnbtn_Click(object sender, EventArgs e)
         {
+            ContentPlaceHolder mpContentPlaceHolder;
+            TextBox mpTextBox;
+            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
+            if (mpContentPlaceHolder != null)
+            {
+                mpTextBox = (TextBox)mpContentPlaceHolder.FindControl("TextBox1");
+                if (mpTextBox != null)
+                {
+                    testnamelbl.Text = mpTextBox.Text;
+                }
+            }
+
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
 
@@ -147,7 +155,7 @@ namespace Web.Tutor
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);
 
 
-           // cmd.Parameters.AddWithValue("@asName", testNamelbl.Text);
+           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
             cmd.Parameters.AddWithValue("@asTotalMarks", totalmarks);
 
             Response.Write("New Test Name Added Successfully!!!Thank you");
