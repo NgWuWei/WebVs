@@ -9,9 +9,45 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <div><h1>Assessment Question prepared by tutor</h1></div>
     <asp:Panel runat="server">
-        <!-- repeator to-->
+        <!-- display question with gridview with select, append empty textbox with selected -->
 
+        <asp:Table ID="Table1" runat="server">
+            <asp:TableRow>
+                <asp:TableCell><p>Question Description: </p></asp:TableCell>
+                <asp:TableCell>
+                    <asp:Label ID="QuestionDisplay" runat="server">
+                        <!-- get data from gridview, use datalist -->
+                        <asp:Label runat="server"></asp:Label>
+                    </asp:Label>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell><p>Answer Here:</p></asp:TableCell>
+                <asp:TableCell>
+                    <asp:TextBox ID="AnswerCell" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+        <!-- display test marks for 1 question -->
+        <div></div>
+        <br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="mqQuestionID" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="asName" HeaderText="Assessment Name" />
+                <asp:BoundField DataField="mqQuestionDesc" HeaderText="Question Details" />
+                <asp:BoundField DataField="mqEachMarks" HeaderText="Question Score" />
+                <asp:BoundField DataField="mqdAnswerDesc" HeaderText="Answer Given" />
+            </Columns> 
+        </asp:GridView>
 
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT A.asName FROM MultiQuestionDetail AS mqd INNER JOIN MultiQuestions AS mq ON mqd.mqQuestionID = mq.mqQuestionID INNER JOIN Assessments AS A ON mq.asID = A.asID WHERE (mq.mqQuestionID = @id)">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="id" QueryStringField="id" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:Button ID="btnSubmit" runat="server" Text="Button" OnClick="BtnSubmit_Click"/>
 
     </asp:Panel>
 </asp:Content>

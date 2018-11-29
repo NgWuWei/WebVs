@@ -19,7 +19,7 @@
 
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id">
             <Columns>
-                <asp:HyperLinkField NavigateUrl='<%#string.Format("~/Student/StudentQuestion.aspx?id={0}", Encrypt(Eval("id").toString))%>' Text="Click me"/>
+                <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="~/Student/StudentQuestion.aspx?id={0}" Text="Click me"/>
                 <asp:BoundField DataField="asname" HeaderText="Assessment Name" />
                 <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" />
                 <asp:BoundField DataField="totalMarks" HeaderText="Total Marks" />
