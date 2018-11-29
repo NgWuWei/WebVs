@@ -40,15 +40,6 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.Button returnbtn;
         
         /// <summary>
-        /// TestPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel TestPanel;
-        
-        /// <summary>
         /// QuestionNolbl control.
         /// </summary>
         /// <remarks>
@@ -103,30 +94,30 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.Button savebtn;
         
         /// <summary>
-        /// PlaceHolder1 control.
+        /// MultiTestView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
+        protected global::System.Web.UI.WebControls.GridView MultiTestView;
         
         /// <summary>
-        /// AddAnswerOptionbtn control.
+        /// MultiTestView0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddAnswerOptionbtn;
+        protected global::System.Web.UI.WebControls.GridView MultiTestView0;
         
         /// <summary>
-        /// AddNewQuestionbtn control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddNewQuestionbtn;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,158 +12,71 @@ namespace Web.Tutor
 {
     public partial class AddMultipleTest : System.Web.UI.Page
     {
+
+        string str = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-           
-
-        }
-
-      
-        static int i = 0;
-        static int questionNumber = 1;
-
-        Label mulquestionlbl = new Label();
-
-        protected void AddAnswerOptionbtn_Click(object sender, EventArgs e)
-        {
-           
-
-            TextBox mulquestiontb;
-            Label mulquestionResultlbl;
-            Label mulquestionlbl2;
-            CheckBox cbox;
-
-            i++;
-            for (int j = 0; j < i; j++)
+            if (!IsPostBack)
             {
-                mulquestiontb = new TextBox();
-                mulquestionlbl = new Label();
-
-                mulquestionResultlbl = new Label();
-                mulquestionlbl2 = new Label();
-
-                // checkbox id = body_cbox_{}
-                cbox = new CheckBox
-                {
-                    ID = "cbox_" + j
-                };
-
-                /// TODO checkbox list dynamic control
-                mulquestiontb.ID = j.ToString();
-                mulquestionlbl.Text = Convert.ToChar(j + 65).ToString();
-                mulquestionlbl2.Text = "(" + Convert.ToChar(j + 65).ToString() + ")";
-
-                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-                PlaceHolder1.Controls.Add(mulquestionlbl2);
-
-                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-                PlaceHolder1.Controls.Add(mulquestiontb);
-
-                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-                //PlaceHolder1.Controls.Add(cbox);
-                //PlaceHolder1.Controls.Add(optionlbl);
-                PlaceHolder1.Controls.Add(new LiteralControl("<br />"));
-
+                ShowGridview();
             }
-            CorrectAnswerddl.Items.Add(mulquestionlbl.Text);
         }
 
-        int totalmarks; // for calculate the marks
-
-        protected void savebtn_Click(object sender, EventArgs e)
+        void ShowGridview()
         {
-           
-
-            TextBox mulquestiontb = new TextBox();
-            //mulquestiontb.FindControl("body_" + i);
-            // TODO get multiquestion id with numbers body_{}
-            // loop to get all answer descriptions into database
-
-            Label mulquestionlbl = new Label();
-
-            int marks = int.Parse(Markstxt.Text);
-            totalmarks += marks;
-
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            conn.Open();
-            string insertQuery1 = "INSERT into Assessment (asName, asQuestionType) values " +
-                "( @asName, @asQuestionType)";
-
-            string insertQuery2 = "INSERT into MultiQuestions( QuestionDesc, EachMarks, CorrectAnswer)values " +
-                "( @QuestionDesc,@EachMarks, @CorrectAnswer)";
-
-            string insertQuery3 = "INSERT into MultiQuestionDetails(EachAnswerDesc, EachAnswerLabel)values " +
-                "( @EachAnswerDesc, @EachAnswerLabel)";
-
-            SqlCommand cmd = new SqlCommand(insertQuery1, conn);
-
-           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
-          /// cmd.Parameters.AddWithValue("@asQuestionType", questionTypelbl.Text);
-
-
-            // second query
-            cmd.CommandText = insertQuery2;
-            cmd.Parameters.AddWithValue("@mqQuestionDesc", QuestionTxt.Text);
-            cmd.Parameters.AddWithValue("@mqEachMarks", marks);
-            cmd.Parameters.AddWithValue("@mqCorrectAnswer", CorrectAnswerddl.SelectedItem.Value);
-
-            cmd.ExecuteNonQuery();
-
-            // third query
-
-            foreach (TextBox textBox in mulquestiontb.Controls.OfType<TextBox>())
+            DataTable dtbl = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(str))
             {
-                cmd.CommandText = insertQuery3;
-                cmd.Parameters.AddWithValue("@mqdAnswerDesc", mulquestiontb.Text);
-                cmd.Parameters.AddWithValue("@mqdAnswerLabel", mulquestionlbl.Text);
-                cmd.ExecuteNonQuery();
+                sqlCon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM MultiQuestionDetail", sqlCon);
+                sqlDa.Fill(dtbl);
+            }
+            if (dtbl.Rows.Count > 0)
+            {
+                MultiTestView.DataSource = dtbl;
+                MultiTestView.DataBind();
+            }
+            else
+            {
+                dtbl.Rows.Add(dtbl.NewRow());
+                MultiTestView.DataSource = dtbl;
+                MultiTestView.DataBind();
+                MultiTestView.Rows[0].Cells.Clear();
+                MultiTestView.Rows[0].Cells.Add(new TableCell());
+                MultiTestView.Rows[0].Cells[0].ColumnSpan = dtbl.Columns.Count;
+                MultiTestView.Rows[0].Cells[0].Text = "No Data Found ..!";
+                MultiTestView.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
             }
 
-
-
-            conn.Close();
-
-            QuestionNolbl.Text = questionNumber.ToString();
-            questionNumber++;
-
-            Response.Redirect("~/Tutor/AddMultipleTest.aspx");
-
         }
 
-
-
-        protected void returnbtn_Click(object sender, EventArgs e)
+        protected void multiTest_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            ContentPlaceHolder mpContentPlaceHolder;
-            TextBox mpTextBox;
-            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
-            if (mpContentPlaceHolder != null)
+            try
             {
-                mpTextBox = (TextBox)mpContentPlaceHolder.FindControl("TextBox1");
-                if (mpTextBox != null)
+                if (e.CommandName.Equals("AddNew"))
                 {
-                    testnamelbl.Text = mpTextBox.Text;
+                    using (SqlConnection sqlCon = new SqlConnection(str))
+                    {
+                        sqlCon.Open();
+                        string query = "INSERT INTO MultiQuestionDetail ( mqdAnswerLabel, mqdAnswerDesc) VALUES (@mqdAnswerLabel,@mqdAnswerDesc)";
+                        SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                        sqlCmd.Parameters.AddWithValue("@mqdAnswerLabel", (MultiTestView.FooterRow.FindControl("txtAnswerLabelFooter") as TextBox).Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@mqdAnswerDesc", (MultiTestView.FooterRow.FindControl("txtmqdAnswerDescFooter") as TextBox).Text.Trim());
+                       
+                        sqlCmd.ExecuteNonQuery();
+                        ShowGridview();
+
+                    }
                 }
             }
-
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            conn.Open();
-
-            string insertQuery1 = "INSERT into Assessment (asTotalMarks) values " +
-                "(@asTotalMarks ) where asName = @asName;";
-
-            SqlCommand cmd = new SqlCommand(insertQuery1, conn);
-
-
-           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
-            cmd.Parameters.AddWithValue("@asTotalMarks", totalmarks);
-
-            Response.Write("New Test Name Added Successfully!!!Thank you");
-
-            conn.Close();
-
-            Response.Redirect("~/Tutor/TestDetailsMenu.aspx");
+            catch (Exception ex)
+            {
+               
+            }
         }
+
+
     }
 }
