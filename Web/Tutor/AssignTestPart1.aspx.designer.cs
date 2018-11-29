@@ -31,13 +31,13 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.Button nextbtn;
         
         /// <summary>
-        /// createnewbtn control.
+        /// ceratenewbtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button createnewbtn;
+        protected global::System.Web.UI.WebControls.Button ceratenewbtn;
         
         /// <summary>
         /// SqlDataSource1 control.

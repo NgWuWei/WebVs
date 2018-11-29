@@ -19,7 +19,10 @@
                 <br />
                 <hr />
                 <br />
-                <asp:Button ID="createnewbtn" runat="server" Text="Create New Group"  />
+                <div>>
+                    <asp:Button ID="ceratenewbtn" runat="server" Text="Create New Group" OnClick="ceratenewbtn_Click" />
+                </div>
+                
             </td>
         </tr>
     </table>

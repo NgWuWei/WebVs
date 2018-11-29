@@ -1,112 +1,88 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="TestDetailsMenu.aspx.cs" Inherits="Web.Tutor.TestDetailsMenu" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="TestDetailsMenu.aspx.cs" Inherits="Web.Tutor.TestDetailsMenu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            margin-top: 46px;
-        }
-        .auto-style2 {
-            margin-left: 36px;
-        }
-        .auto-style3 {
-            margin-right: 0px;
-            margin-top: 154px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <p>
-        Test Name: <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-    </p>
-    <asp:Panel ID="Panel1" runat="server">
-        <asp:GridView ID="GridView1" runat="server" ShowFooter="true" DataKeyNames="QuestionID" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="auto-style3" Width="441px" 
-                           
-            >
-            <AlternatingRowStyle BackColor="White" />
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-            
-            <Columns>
-                <asp:TemplateField HeaderText="Question No.">
-                    <ItemTemplate>
-                         <asp:Label Text='<%# Eval("QuestionNumber") %>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                         <asp:TextBox ID="txtQuestionNumber" Text='<%# Eval("QuestionNumber") %>' runat="server" />
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox ID="txtNewQuestionNumber" runat="server" />
-                    </FooterTemplate>
-                </asp:TemplateField>
+     <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="No"
+                ShowHeaderWhenEmpty="True"
 
-                 <asp:TemplateField HeaderText="Question Description">
-                    <ItemTemplate>
-                         <asp:Label Text='<%# Eval("QuestionDesc") %>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                         <asp:TextBox ID="txtQuestionDesc" Text='<%# Eval("QuestionDesc") %>' runat="server" />
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox ID="txtNewQuestionDesc" runat="server" />
-                    </FooterTemplate>
-                </asp:TemplateField>
+                OnRowCommand="multiTest_RowCommand"  OnRowEditing="multiTest_RowEditing" OnRowCancelingEdit="multiTest_RowCancelingEdit"
+                OnRowUpdating="multiTest_RowUpdating" OnRowDeleting="multiTest_RowDeleting"
 
-                 <asp:TemplateField HeaderText="Correct Answer">
-                    <ItemTemplate>
-                         <asp:Label Text='<%# Eval("CorrectAnswer") %>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                         <asp:TextBox ID="txtCorrectAnswer" Text='<%# Eval("CorrectAnswer") %>' runat="server" />
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox ID="txtNewCorrectAnswer" runat="server" />
-                    </FooterTemplate>
-                </asp:TemplateField>
+                BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" CssClass="auto-style16" style="margin-left: 159px">
+                <%-- Theme Properties --%>
+                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <RowStyle ForeColor="Black" BackColor="#EEEEEE" />
+                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#000065" />
+                
+                <AlternatingRowStyle BackColor="#DCDCDC" />
+                
+                <Columns>
+                    <asp:templatefield HeaderText="Select">
+                    <itemtemplate>
+                        <asp:checkbox ID="cbSelect" 
 
-                 <asp:TemplateField HeaderText="Each Question Result">
-                    <ItemTemplate>
-                         <asp:Label Text='<%# Eval("EachQuestionResult") %>' runat="server" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                         <asp:TextBox ID="txtEachQuestionResult" Text='<%# Eval("EachQuestionResult") %>' runat="server" />
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                         <asp:TextBox ID="txtNewEachQuestionResult" runat="server" />
-                    </FooterTemplate>
-                </asp:TemplateField>
+                        CssClass="gridCB" runat="server"></asp:checkbox>
+                    </itemtemplate>
+                    </asp:templatefield>
 
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:ImageButton ImageUrl="~/Resources/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>
-                        <asp:ImageButton ImageUrl="~/Resources/delete.png" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px"/>
-                   </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:ImageButton ImageUrl="~/Resources/save.png" runat="server" CommandName="Update" ToolTip="Update" Width="20px" Height="20px"/>
-                        <asp:ImageButton ImageUrl="~/Resources/cancel.png" runat="server" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px"/>
-                    </EditItemTemplate>
-                    <FooterTemplate>
-                            <asp:ImageButton ImageUrl="~/Resources/addnew.png" runat="server" PostBackUrl="~/Tutor/AddTestMenu.aspx" ToolTip="Add New" Width="20px" Height="20px"/>
-                     </FooterTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-    </asp:Panel>
-    <br />
-    <asp:Panel ID="Panel2" runat="server" CssClass="auto-style1">
-        <div style="text-align:center">
-            <h3>Ready to give your Test?</h3>
-            <br />
-            <asp:Button ID="Assignbtn" runat="server" Text="Assign" CssClass="auto-style2" />
-        </div>
-        
-    </asp:Panel>
+                    <asp:TemplateField HeaderText="Test Name">
+                        <ItemTemplate>
+                            <asp:Label  Text='<%# Eval("asName") %>' runat="server"  ></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtasNametxt"   runat="server" />
+                        </EditItemTemplate>
+             <%--           Text='<%# Eval("mqdAnswerID") %>'--%>
+                        
+                    </asp:TemplateField>
+
+                     <asp:TemplateField HeaderText="Question Type">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("asQuestionType") %>' runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtQuestionType" Text='<%# Eval("asQuestionType") %>' runat="server" />
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtQuestionTypeFooter" runat="server" />
+                        </FooterTemplate>
+                    </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Total Marks">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("asTotalMarks") %>' runat="server" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtTotalMarks" Text='<%# Eval("asTotalMarks") %>' runat="server" />
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtTotalMarksFooter" runat="server" />
+                        </FooterTemplate>
+                    </asp:TemplateField>     
+  
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Resources/delete.png" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Resources/save.png" runat="server" CommandName="Update" ToolTip="Update" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Resources/cancel.png" runat="server" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:ImageButton ImageUrl="~/Resources/addnew.png" runat="server" NavigationUrl="~/Tutor/AddTestMenu.aspx" CommandName="AddNew" ToolTip="Add New" Width="20px" Height="20px"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
+    <asp:Button ID="Assignbtn" runat="server" Text="Assign" OnClick="Assignbtn_Click" />
 </asp:Content>

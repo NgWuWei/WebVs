@@ -83,9 +83,9 @@
                <li class ="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Tools &#10000</a>
                     <div class="dropdown-content">
-                        <a href="#">New Test+</a>
+                        <a href="/Tutor/AddTestMenu.aspx">New Test+</a>
                         <a href="#">New List+</a>
-                        <a href="#">New Group+</a>
+                        <a href="/Tutor/AddGroupMenu.aspx">New Group+</a>
                     </div>
                 </li>
                 <!-- UNDONE CREATE C# IF ELSE TO TOGGLE LOGIN WITH SIGNED IN-->
@@ -100,9 +100,13 @@
 
             <!-- UNDONE custom view for this, also move these into tutor master page -->
                <div ID="SiteMap1">
-                <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1">
-                </asp:TreeView>
-                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                   <br />
+                   <br />
+                   <br />
+                   <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                   </asp:SiteMapPath>
+                   <br />
+                   <br />
                 </div>
 
             <asp:ContentPlaceHolder ID="body" runat="server">

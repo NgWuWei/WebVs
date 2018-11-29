@@ -13,5 +13,12 @@ namespace Web.Tutor
 		{
 
 		}
-	}
+
+        protected void confirmbtn_Click(object sender, EventArgs e)
+        {
+            Confirmlbl.Text = "Your Test is assigned to your Group. " + "<br />" +
+                "You can edit these settings at any time by going to the Tests section, then select the Settings link for this assignment.";
+
+        }
+    }
 }

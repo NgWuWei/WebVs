@@ -28,7 +28,9 @@
         </asp:DropDownList>
         <br />
         <br />
-        <asp:Button ID="Button1" PostBackUrl="~/Tutor/AddMultipleTest.aspx" ClientIDMode="Static" runat="server" BackColor="#FF3300" ForeColor="White" Text="Start Adding Question"  OnClientClick="javascript:alert('You are now will be directed to the add question page')"   CssClass="auto-style4"    />
+        <asp:Button ID="Button1"  ClientIDMode="Static" runat="server" BackColor="#FF3300" ForeColor="White" Text="Start Adding Question"  OnClientClick="javascript:alert('You are now will be directed to the add question page')"   CssClass="auto-style4" OnClick="Button1_Click"    />
+
+        <br />
 
     </div>
 </asp:Content>

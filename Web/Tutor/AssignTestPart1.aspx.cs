@@ -14,7 +14,9 @@ namespace Web.Tutor
 
         }
 
-        protected void createnewbtn_Click(object sender, EventArgs e)
+       
+
+        protected void ceratenewbtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Tutor/AssignTestPart2.aspx");
         }

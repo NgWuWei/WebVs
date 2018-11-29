@@ -27,13 +27,10 @@
         .auto-style11 {
             height: 22px;
         }
-        .auto-style13 {
-            height: 40px;
-            width: 171px;
-        }
-        .auto-style14 {
-            height: 40px;
-        }
+        .auto-style16 {
+        margin-left: 252px;
+        margin-top: 54px;
+    }
     </style>
     <br />
     <br />
@@ -48,7 +45,7 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
 <div style="float:right">
-        <asp:Button ID="returnbtn" runat="server" Text="Return to test menu" />
+        <asp:Button ID="returnbtn" runat="server" Text="Return to test menu" OnClick="returnbtn_Click" />
 </div>
 
     <table id="TestTable" class="auto-style8">  
@@ -61,7 +58,7 @@
                 
                     <br />
                     <br />
-                    *QUE4TION NO.<br />
+                    *QUESTION NO.<br />
                     <asp:Label ID="QuestionNolbl" runat="server"></asp:Label>
                 </td>
                 <td class="auto-style11">
@@ -73,60 +70,64 @@
 
                 </td>
             </tr>
-            <tr>
-                <td class="auto-style13">
-                    *CORRECT ANSWER : <br />
-                    <asp:DropDownList ID ="CorrectAnswerddl"  runat="server" ></asp:DropDownList>
-                    <br />
-                    <br />
-                    <asp:Button ID="savebtn" runat="server" Text="Save"  />
-                </td>
-                <td class="auto-style14">
-                
-                <br />
-            </td>
-        </tr>
-    </table>
-    <table style="width: 100%;">
-        
-        <tr>
-            <td>
-                <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" 
-                    DataKeyNames="mqdAnswerID"
+            </table>
+        <div>
+            
+
+            <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="No"
                 ShowHeaderWhenEmpty="True"
-                    OnRowCommand="multiTest_RowCommand" 
 
-                 CellPadding="4" ForeColor="#333333" GridLines="None">
+                OnRowCommand="multiTest_RowCommand"  OnRowEditing="multiTest_RowEditing" OnRowCancelingEdit="multiTest_RowCancelingEdit"
+                OnRowUpdating="multiTest_RowUpdating" OnRowDeleting="multiTest_RowDeleting"
 
-                    <AlternatingRowStyle BackColor="White" />
+                BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" CssClass="auto-style16">
+                <%-- Theme Properties --%>
+                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <RowStyle ForeColor="Black" BackColor="#EEEEEE" />
+                <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#0000A9" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#000065" />
+                
+                <AlternatingRowStyle BackColor="#DCDCDC" />
+                
+                <Columns>
+                    <asp:templatefield HeaderText="Select">
+                    <itemtemplate>
+                        <asp:checkbox ID="cbSelect" 
 
-                    <Columns>
-                    
-                    <asp:TemplateField HeaderText="Answer Label">
+                        CssClass="gridCB" runat="server"></asp:checkbox>
+                    </itemtemplate>
+                    </asp:templatefield>
+
+                    <asp:TemplateField HeaderText="Answer No.">
                         <ItemTemplate>
-                            <asp:Label Text='<%# Eval("mqdAnswerLabel") %>' runat="server" />
+                            <asp:Label ID="txtmqdAnswerID" Text='<%# Eval("maAnswerID") %>' runat="server"  ></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtLastName" Text='<%# Eval("mqdAnswerLabel") %>' runat="server" />
+                            <asp:TextBox ID="txtmqdAnswerID"   runat="server" />
                         </EditItemTemplate>
-                        <FooterTemplate>
-                            <asp:TextBox ID="txtAnswerLabelFooter" runat="server" />
-                        </FooterTemplate>
+             <%--           Text='<%# Eval("mqdAnswerID") %>'--%>
+                        
                     </asp:TemplateField>
-                    
-                    <asp:TemplateField HeaderText="Answer Description">
+
+                     <asp:TemplateField HeaderText="Answer Description">
                         <ItemTemplate>
-                            <asp:Label Text='<%# Eval("mqdAnswerDesc") %>' runat="server" />
+                            <asp:Label Text='<%# Eval("maAnswerDesc") %>' runat="server" />
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtmqdAnswerDescName" Text='<%# Eval("mqdAnswerDesc") %>' runat="server" />
+                            <asp:TextBox ID="txtmqdAnswerDescName" Text='<%# Eval("maAnswerDesc") %>' runat="server" />
                         </EditItemTemplate>
                         <FooterTemplate>
                             <asp:TextBox ID="txtmqdAnswerDescFooter" runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
-
-                   <asp:TemplateField>
+     
+  
+                    <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ImageUrl="~/Resources/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>
                             <asp:ImageButton ImageUrl="~/Resources/delete.png" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px"/>
@@ -139,57 +140,17 @@
                             <asp:ImageButton ImageUrl="~/Resources/addnew.png" runat="server" CommandName="AddNew" ToolTip="Add New" Width="20px" Height="20px"/>
                         </FooterTemplate>
                     </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+            <br />
+            <br />
+            <asp:Button ID="savebtn" runat="server" OnClick="savebtn_Click1" Text="Save" />
+            <br />
+            <br />
 
-                    </Columns>
+            <br />
 
-                    <EditRowStyle BackColor="#7C6F57" />
-                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#E3EAEB" />
-                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                    <SortedAscendingHeaderStyle BackColor="#246B61" />
-                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                    <SortedDescendingHeaderStyle BackColor="#15524A" />
+        </div>
 
-                </asp:GridView>
-
-                <br />
-                <asp:GridView ID="MultiTestView0" runat="server" AutoGenerateColumns="False" ShowFooter="True"
-                ShowHeaderWhenEmpty="True"
-
-                 CellPadding="4" ForeColor="#333333" GridLines="None" DataSourceID="SqlDataSource1">
-
-                    <AlternatingRowStyle BackColor="White" />
-
-                    <Columns>
-                    
-                        <asp:BoundField DataField="mqdAnswerLabel" HeaderText="mqdAnswerLabel" SortExpression="mqdAnswerLabel" />
-                        <asp:BoundField DataField="mqdAnswerDesc" HeaderText="mqdAnswerDesc" SortExpression="mqdAnswerDesc" />
-
-                    </Columns>
-
-                    <EditRowStyle BackColor="#7C6F57" />
-                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                    <RowStyle BackColor="#E3EAEB" />
-                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                    <SortedAscendingHeaderStyle BackColor="#246B61" />
-                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                    <SortedDescendingHeaderStyle BackColor="#15524A" />
-
-                </asp:GridView>
-
-                <br />
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT mqd.mqdAnswerLabel, mqd.mqdAnswerDesc FROM MultiQuestionDetail mqd, MultiQuestions mq WHERE mqd.mqQuestionID = mq.mqQuestionID"></asp:SqlDataSource>
-
-                <br />
-
-            </td>
-        </tr>
-    </table>
 
 </asp:Content>
