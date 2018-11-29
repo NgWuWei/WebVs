@@ -1,10 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AddMultipleTest.aspx.cs" Inherits="Web.Tutor.AddMultipleTest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="AddMultipleTest.aspx.cs" Inherits="Web.Tutor.AddMultipleTest"     %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style5 {
             height: 23px;
@@ -35,18 +33,23 @@
             height: 40px;
         }
     </style>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
 
     <br />
     <br />
     <br />
-   
-        TEST NAME     : 
-        <asp:Label ID="testNamelbl" runat="server"></asp:Label>
+
+
+        TEST NAME     :   <asp:Label ID="testnamelbl" runat="server"></asp:Label>
     <br /><br />
-        QUESTION TYPE : 
-        <asp:Label ID="qtlbl" runat="server"></asp:Label>
+        QUESTION TYPE :   <asp:Label ID="questiontypelbl" runat="server"></asp:Label>
+    
+</asp:Content>
 
-      <div style="float:right">
+<asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
+
+    <div style="float:right">
         <asp:Button ID="returnbtn" runat="server" Text="Return to test menu" />
     </div>
     <table class="auto-style8">  
@@ -87,7 +90,4 @@
             </td>
         </tr>
     </table>
-    
-    
-    
 </asp:Content>

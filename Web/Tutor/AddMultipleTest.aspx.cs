@@ -11,34 +11,14 @@ namespace Web.Tutor
 {
     public partial class AddMultipleTest : System.Web.UI.Page
     {
-        
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            ContentPlaceHolder mpContentPlaceHolder;
-            TextBox testNametxt;
-            DropDownList QType;
-            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
-            if (mpContentPlaceHolder != null)
-            {
-                testNametxt = (TextBox)mpContentPlaceHolder.FindControl("txtTestName");
-                if (testNametxt != null)
-                {
-                    testNamelbl.Text = testNamelbl.Text;
-                }
-            }
-
 
            
 
+        }
 
-        //Session["GroupName"] = txtGroupName.Text;
-        // Session["TestName"] = txtTestName.Text;
-
-        // Session["TestType"] = QuestionTypeList.SelectedItem.Value;
-
-         }
-
+      
         static int i = 0;
         static int questionNumber = 1;
 
@@ -46,6 +26,8 @@ namespace Web.Tutor
 
         protected void AddAnswerOptionbtn_Click(object sender, EventArgs e)
         {
+           
+
             TextBox mulquestiontb;
             Label mulquestionResultlbl;
             Label mulquestionlbl2;
@@ -90,6 +72,8 @@ namespace Web.Tutor
 
         protected void savebtn_Click(object sender, EventArgs e)
         {
+           
+
             TextBox mulquestiontb = new TextBox();
             //mulquestiontb.FindControl("body_" + i);
             // TODO get multiquestion id with numbers body_{}
@@ -105,7 +89,7 @@ namespace Web.Tutor
             string insertQuery1 = "INSERT into Assessment (asName, asQuestionType) values " +
                 "( @asName, @asQuestionType)";
 
-            string insertQuery2 = "INSERT into MultiQuestion( QuestionDesc, EachMarks, CorrectAnswer)values " +
+            string insertQuery2 = "INSERT into MultiQuestions( QuestionDesc, EachMarks, CorrectAnswer)values " +
                 "( @QuestionDesc,@EachMarks, @CorrectAnswer)";
 
             string insertQuery3 = "INSERT into MultiQuestionDetails(EachAnswerDesc, EachAnswerLabel)values " +
@@ -113,15 +97,15 @@ namespace Web.Tutor
 
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);
 
-           // cmd.Parameters.AddWithValue("@asName", testNamelbl.Text);
-           // cmd.Parameters.AddWithValue("@asQuestionType", questionTypelbl.Text);
+           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
+          /// cmd.Parameters.AddWithValue("@asQuestionType", questionTypelbl.Text);
 
 
             // second query
             cmd.CommandText = insertQuery2;
-            cmd.Parameters.AddWithValue("@QuestionDesc", QuestionTxt.Text);
-            cmd.Parameters.AddWithValue("@EachMarks", marks);
-            cmd.Parameters.AddWithValue("@CorrectAnswer", CorrectAnswerddl.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@mqQuestionDesc", QuestionTxt.Text);
+            cmd.Parameters.AddWithValue("@mqEachMarks", marks);
+            cmd.Parameters.AddWithValue("@mqCorrectAnswer", CorrectAnswerddl.SelectedItem.Value);
 
             cmd.ExecuteNonQuery();
 
@@ -130,8 +114,8 @@ namespace Web.Tutor
             foreach (TextBox textBox in mulquestiontb.Controls.OfType<TextBox>())
             {
                 cmd.CommandText = insertQuery3;
-                cmd.Parameters.AddWithValue("@EachAnswerDesc", mulquestiontb.Text);
-                cmd.Parameters.AddWithValue("@EachAnswerLabel", mulquestionlbl.Text);
+                cmd.Parameters.AddWithValue("@mqdAnswerDesc", mulquestiontb.Text);
+                cmd.Parameters.AddWithValue("@mqdAnswerLabel", mulquestionlbl.Text);
                 cmd.ExecuteNonQuery();
             }
 
@@ -150,6 +134,18 @@ namespace Web.Tutor
 
         protected void returnbtn_Click(object sender, EventArgs e)
         {
+            ContentPlaceHolder mpContentPlaceHolder;
+            TextBox mpTextBox;
+            mpContentPlaceHolder = (ContentPlaceHolder)PreviousPage.Master.FindControl("body");
+            if (mpContentPlaceHolder != null)
+            {
+                mpTextBox = (TextBox)mpContentPlaceHolder.FindControl("TextBox1");
+                if (mpTextBox != null)
+                {
+                    testnamelbl.Text = mpTextBox.Text;
+                }
+            }
+
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conn.Open();
 
@@ -159,7 +155,7 @@ namespace Web.Tutor
             SqlCommand cmd = new SqlCommand(insertQuery1, conn);
 
 
-           // cmd.Parameters.AddWithValue("@asName", testNamelbl.Text);
+           cmd.Parameters.AddWithValue("@asName", testnamelbl.Text);
             cmd.Parameters.AddWithValue("@asTotalMarks", totalmarks);
 
             Response.Write("New Test Name Added Successfully!!!Thank you");

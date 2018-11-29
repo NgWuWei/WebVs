@@ -80,6 +80,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Menu.aspx" />
     <Content Include="Tutor\AddGroupDetails.aspx" />
+    <Content Include="Tutor\AddGroupMenu.aspx" />
     <Content Include="Tutor\AddMultipleTest.aspx" />
     <Content Include="Tutor\AddTestMenu.aspx" />
     <Content Include="Tutor\AssignTestPart2.aspx" />
@@ -100,7 +101,6 @@
     <None Include="Resources\addnew.png" />
     <None Include="Resources\assign.png" />
     <Content Include="Student\Student.aspx" />
-    <Content Include="Tutor\AddGroupMenu.aspx" />
     <Content Include="Tutor\Assessment.aspx" />
     <Content Include="Tutor\AssignTestPart1.aspx" />
     <Content Include="Tutor\TestMenu.aspx" />

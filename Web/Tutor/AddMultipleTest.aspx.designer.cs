@@ -13,22 +13,22 @@ namespace Web.Tutor {
     public partial class AddMultipleTest {
         
         /// <summary>
-        /// testNamelbl control.
+        /// testnamelbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testNamelbl;
+        protected global::System.Web.UI.WebControls.Label testnamelbl;
         
         /// <summary>
-        /// qtlbl control.
+        /// questiontypelbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label qtlbl;
+        protected global::System.Web.UI.WebControls.Label questiontypelbl;
         
         /// <summary>
         /// returnbtn control.

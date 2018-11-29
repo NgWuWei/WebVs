@@ -13,11 +13,5 @@ namespace Web.Tutor
         {
 
         }
-
-        protected void AddTestbtn_Click(object sender, EventArgs e)
-        {
-            Session["GroupName"] = txtGroupName.Text;
-            Response.Redirect("~/Tutor/AddGroupDetails.aspx");
-        }
     }
 }

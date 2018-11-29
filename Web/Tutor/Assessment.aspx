@@ -29,3 +29,6 @@
         <asp:HyperLink runat="server" NavigateUrl="~/Tutor/ViewRecords.aspx">View Students Data</asp:HyperLink>
     </asp:Panel>
 </asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
+</asp:Content>
