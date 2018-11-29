@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assessments">
+          <Key>
+            <PropertyRef Name="asID" />
+          </Key>
+          <Property Name="asID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="asName" Type="varchar" MaxLength="30" />
+          <Property Name="asDetails" Type="varchar" MaxLength="30" />
+          <Property Name="asQuestionType" Type="varchar" MaxLength="30" />
+          <Property Name="asTotalMarks" Type="int" />
+          <Property Name="asTime" Type="int" />
+          <Property Name="asDueDate" Type="varchar" MaxLength="10" />
+          <Property Name="grpId" Type="int" />
+          <Property Name="tutorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseName" Type="varchar" MaxLength="30" />
+          <Property Name="courseDesc" Type="varchar" MaxLength="30" />
+          <Property Name="courseCode" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="grpId" />
+          </Key>
+          <Property Name="grpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grpName" Type="varchar" MaxLength="30" />
+          <Property Name="grpDesc" Type="varchar" MaxLength="30" />
+          <Property Name="grpDate" Type="varchar" MaxLength="30" />
+          <Property Name="studId" Type="int" />
+        </EntityType>
+        <EntityType Name="MultiAnswers">
+          <Key>
+            <PropertyRef Name="maAnswerID" />
+          </Key>
+          <Property Name="maAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maAnswerDesc" Type="varchar" MaxLength="50" />
+          <Property Name="maAnswerLabel" Type="varchar" MaxLength="50" />
+          <Property Name="mqQuestionID" Type="int" />
+        </EntityType>
+        <EntityType Name="MultiQuestions">
+          <Key>
+            <PropertyRef Name="mqQuestionID" />
+          </Key>
+          <Property Name="mqQuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mqQuestionDesc" Type="varchar" MaxLength="50" />
+          <Property Name="mqEachMarks" Type="int" />
+          <Property Name="mqCorrectAnswer" Type="varchar" MaxLength="50" />
+          <Property Name="asID" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="studId" />
+          </Key>
+          <Property Name="studId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studName" Type="varchar" MaxLength="30" />
+          <Property Name="studEmail" Type="varchar" MaxLength="30" />
+          <Property Name="studPass" Type="varchar" MaxLength="30" />
+          <Property Name="studBirthdate" Type="varchar" MaxLength="10" />
+          <Property Name="studScore" Type="tinyint" />
+          <Property Name="studGrade" Type="char" MaxLength="1" />
+          <Property Name="studGender" Type="char" MaxLength="1" />
+          <Property Name="courseId" Type="int" />
+        </EntityType>
+        <EntityType Name="Tutors">
+          <Key>
+            <PropertyRef Name="tutorId" />
+          </Key>
+          <Property Name="tutorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tutorName" Type="varchar" MaxLength="30" />
+          <Property Name="tutorIC" Type="int" />
+          <Property Name="tutorGender" Type="char" MaxLength="1" />
+          <Property Name="tutorSubject" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Assessmen__grpId__2A164134">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Assessments" Type="Self.Assessments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="grpId" />
+            </Principal>
+            <Dependent Role="Assessments">
+              <PropertyRef Name="grpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assessmen__tutor__29221CFB">
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
+          <End Role="Assessments" Type="Self.Assessments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="tutorId" />
+            </Principal>
+            <Dependent Role="Assessments">
+              <PropertyRef Name="tutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__studId__3D2915A8">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="studId" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="studId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MultiAnsw__mqQue__756D6ECB">
+          <End Role="MultiQuestions" Type="Self.MultiQuestions" Multiplicity="0..1" />
+          <End Role="MultiAnswers" Type="Self.MultiAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultiQuestions">
+              <PropertyRef Name="mqQuestionID" />
+            </Principal>
+            <Dependent Role="MultiAnswers">
+              <PropertyRef Name="mqQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MultiQuest__asID__2B0A656D">
+          <End Role="Assessments" Type="Self.Assessments" Multiplicity="0..1" />
+          <End Role="MultiQuestions" Type="Self.MultiQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assessments">
+              <PropertyRef Name="asID" />
+            </Principal>
+            <Dependent Role="MultiQuestions">
+              <PropertyRef Name="asID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__course__4F47C5E3">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Assessments" EntityType="Self.Assessments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MultiAnswers" EntityType="Self.MultiAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MultiQuestions" EntityType="Self.MultiQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Assessmen__grpId__2A164134" Association="Self.FK__Assessmen__grpId__2A164134">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Assessments" EntitySet="Assessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assessmen__tutor__29221CFB" Association="Self.FK__Assessmen__tutor__29221CFB">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="Assessments" EntitySet="Assessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__studId__3D2915A8" Association="Self.FK__Groups__studId__3D2915A8">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MultiAnsw__mqQue__756D6ECB" Association="Self.FK__MultiAnsw__mqQue__756D6ECB">
+            <End Role="MultiQuestions" EntitySet="MultiQuestions" />
+            <End Role="MultiAnswers" EntitySet="MultiAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MultiQuest__asID__2B0A656D" Association="Self.FK__MultiQuest__asID__2B0A656D">
+            <End Role="Assessments" EntitySet="Assessments" />
+            <End Role="MultiQuestions" EntitySet="MultiQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__course__4F47C5E3" Association="Self.FK__Students__course__4F47C5E3">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assessment">
+          <Key>
+            <PropertyRef Name="asID" />
+          </Key>
+          <Property Name="asID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="asName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="asDetails" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="asQuestionType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="asTotalMarks" Type="Int32" />
+          <Property Name="asTime" Type="Int32" />
+          <Property Name="asDueDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="grpId" Type="Int32" />
+          <Property Name="tutorId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__Assessmen__grpId__2A164134" FromRole="Assessments" ToRole="Groups" />
+          <NavigationProperty Name="Tutor" Relationship="Self.FK__Assessmen__tutor__29221CFB" FromRole="Assessments" ToRole="Tutors" />
+          <NavigationProperty Name="MultiQuestions" Relationship="Self.FK__MultiQuest__asID__2B0A656D" FromRole="Assessments" ToRole="MultiQuestions" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="courseDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Students__course__3C34F16F" FromRole="Courses" ToRole="Students" />
+          <Property Name="courseCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="grpId" />
+          </Key>
+          <Property Name="grpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grpName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="grpDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="grpDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="studId" Type="Int32" />
+          <NavigationProperty Name="Assessments" Relationship="Self.FK__Assessmen__grpId__2A164134" FromRole="Groups" ToRole="Assessments" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Groups__studId__3D2915A8" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="MultiQuestion">
+          <Key>
+            <PropertyRef Name="mqQuestionID" />
+          </Key>
+          <Property Name="mqQuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mqQuestionDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mqEachMarks" Type="Int32" />
+          <Property Name="mqCorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="asID" Type="Int32" />
+          <NavigationProperty Name="Assessment" Relationship="Self.FK__MultiQuest__asID__2B0A656D" FromRole="MultiQuestions" ToRole="Assessments" />
+          <NavigationProperty Name="MultiAnswers1" Relationship="Database1Model.FK__MultiAnsw__mqQue__756D6ECB" FromRole="MultiQuestion" ToRole="MultiAnswer1" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studId" />
+          </Key>
+          <Property Name="studId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="studEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="studPass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="studBirthdate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="studScore" Type="Byte" />
+          <Property Name="studGrade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="studGender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="courseId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK__Students__course__3C34F16F" FromRole="Students" ToRole="Courses" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__Groups__studId__3D2915A8" FromRole="Students" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="tutorId" />
+          </Key>
+          <Property Name="tutorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tutorName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="tutorIC" Type="Int32" />
+          <Property Name="tutorGender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tutorSubject" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Assessments" Relationship="Self.FK__Assessmen__tutor__29221CFB" FromRole="Tutors" ToRole="Assessments" />
+        </EntityType>
+        <Association Name="FK__Assessmen__grpId__2A164134">
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Assessments" Type="Self.Assessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="grpId" />
+            </Principal>
+            <Dependent Role="Assessments">
+              <PropertyRef Name="grpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assessmen__tutor__29221CFB">
+          <End Role="Tutors" Type="Self.Tutor" Multiplicity="0..1" />
+          <End Role="Assessments" Type="Self.Assessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="tutorId" />
+            </Principal>
+            <Dependent Role="Assessments">
+              <PropertyRef Name="tutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MultiQuest__asID__2B0A656D">
+          <End Role="Assessments" Type="Self.Assessment" Multiplicity="0..1" />
+          <End Role="MultiQuestions" Type="Self.MultiQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assessments">
+              <PropertyRef Name="asID" />
+            </Principal>
+            <Dependent Role="MultiQuestions">
+              <PropertyRef Name="asID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Students__course__3C34F16F">
+          <End Role="Courses" Type="Database1Model.Course" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="courseId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="courseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__studId__3D2915A8">
+          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="studId" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="studId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assessments" EntityType="Self.Assessment" />
+          <EntitySet Name="Courses" EntityType="Database1Model.Course" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="MultiQuestions" EntityType="Self.MultiQuestion" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Tutors" EntityType="Self.Tutor" />
+          <AssociationSet Name="FK__Assessmen__grpId__2A164134" Association="Self.FK__Assessmen__grpId__2A164134">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Assessments" EntitySet="Assessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assessmen__tutor__29221CFB" Association="Self.FK__Assessmen__tutor__29221CFB">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="Assessments" EntitySet="Assessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MultiQuest__asID__2B0A656D" Association="Self.FK__MultiQuest__asID__2B0A656D">
+            <End Role="Assessments" EntitySet="Assessments" />
+            <End Role="MultiQuestions" EntitySet="MultiQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Students__course__3C34F16F" Association="Self.FK__Students__course__3C34F16F">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__studId__3D2915A8" Association="Self.FK__Groups__studId__3D2915A8">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <EntitySet Name="MultiAnswers" EntityType="Database1Model.MultiAnswers" />
+          <AssociationSet Name="FK__MultiAnsw__mqQue__756D6ECB" Association="Database1Model.FK__MultiAnsw__mqQue__756D6ECB">
+            <End Role="MultiQuestion" EntitySet="MultiQuestions" />
+            <End Role="MultiAnswer1" EntitySet="MultiAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MultiAnswers">
+          <Key>
+            <PropertyRef Name="maAnswerID" />
+          </Key>
+          <Property Name="maAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maAnswerDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="maAnswerLabel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mqQuestionID" Type="Int32" />
+          <NavigationProperty Name="MultiQuestion" Relationship="Database1Model.FK__MultiAnsw__mqQue__756D6ECB" FromRole="MultiAnswer1" ToRole="MultiQuestion" />
+        </EntityType>
+        <Association Name="FK__MultiAnsw__mqQue__756D6ECB">
+          <End Type="Database1Model.MultiQuestion" Role="MultiQuestion" Multiplicity="0..1" />
+          <End Type="Database1Model.MultiAnswers" Role="MultiAnswer1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MultiQuestion">
+              <PropertyRef Name="mqQuestionID" />
+            </Principal>
+            <Dependent Role="MultiAnswer1">
+              <PropertyRef Name="mqQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="Assessments">
+            <EntityTypeMapping TypeName="Database1Model.Assessment">
+              <MappingFragment StoreEntitySet="Assessments">
+                <ScalarProperty Name="asID" ColumnName="asID" />
+                <ScalarProperty Name="asName" ColumnName="asName" />
+                <ScalarProperty Name="asDetails" ColumnName="asDetails" />
+                <ScalarProperty Name="asQuestionType" ColumnName="asQuestionType" />
+                <ScalarProperty Name="asTotalMarks" ColumnName="asTotalMarks" />
+                <ScalarProperty Name="asTime" ColumnName="asTime" />
+                <ScalarProperty Name="asDueDate" ColumnName="asDueDate" />
+                <ScalarProperty Name="grpId" ColumnName="grpId" />
+                <ScalarProperty Name="tutorId" ColumnName="tutorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Database1Model.Course">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="courseDesc" ColumnName="courseDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="Database1Model.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="grpId" ColumnName="grpId" />
+                <ScalarProperty Name="grpName" ColumnName="grpName" />
+                <ScalarProperty Name="grpDesc" ColumnName="grpDesc" />
+                <ScalarProperty Name="grpDate" ColumnName="grpDate" />
+                <ScalarProperty Name="studId" ColumnName="studId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultiQuestions">
+            <EntityTypeMapping TypeName="Database1Model.MultiQuestion">
+              <MappingFragment StoreEntitySet="MultiQuestions">
+                <ScalarProperty Name="mqQuestionID" ColumnName="mqQuestionID" />
+                <ScalarProperty Name="mqQuestionDesc" ColumnName="mqQuestionDesc" />
+                <ScalarProperty Name="mqEachMarks" ColumnName="mqEachMarks" />
+                <ScalarProperty Name="mqCorrectAnswer" ColumnName="mqCorrectAnswer" />
+                <ScalarProperty Name="asID" ColumnName="asID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Database1Model.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="studId" ColumnName="studId" />
+                <ScalarProperty Name="studName" ColumnName="studName" />
+                <ScalarProperty Name="studEmail" ColumnName="studEmail" />
+                <ScalarProperty Name="studPass" ColumnName="studPass" />
+                <ScalarProperty Name="studBirthdate" ColumnName="studBirthdate" />
+                <ScalarProperty Name="studScore" ColumnName="studScore" />
+                <ScalarProperty Name="studGrade" ColumnName="studGrade" />
+                <ScalarProperty Name="studGender" ColumnName="studGender" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutors">
+            <EntityTypeMapping TypeName="Database1Model.Tutor">
+              <MappingFragment StoreEntitySet="Tutors">
+                <ScalarProperty Name="tutorId" ColumnName="tutorId" />
+                <ScalarProperty Name="tutorName" ColumnName="tutorName" />
+                <ScalarProperty Name="tutorIC" ColumnName="tutorIC" />
+                <ScalarProperty Name="tutorGender" ColumnName="tutorGender" />
+                <ScalarProperty Name="tutorSubject" ColumnName="tutorSubject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultiAnswers">
+            <EntityTypeMapping TypeName="Database1Model.MultiAnswers">
+              <MappingFragment StoreEntitySet="MultiAnswers">
+                <ScalarProperty Name="mqQuestionID" ColumnName="mqQuestionID" />
+                <ScalarProperty Name="maAnswerLabel" ColumnName="maAnswerLabel" />
+                <ScalarProperty Name="maAnswerDesc" ColumnName="maAnswerDesc" />
+                <ScalarProperty Name="maAnswerID" ColumnName="maAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

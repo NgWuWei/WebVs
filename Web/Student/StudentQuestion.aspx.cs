@@ -8,7 +8,6 @@ using System.Web.UI.WebControls;
 namespace Web.Student {
     public partial class StudentQuestion : System.Web.UI.Page {
         private float TotalScore = 0;
-        private string asId = "";
 
         protected void Page_Load(object sender, EventArgs e) {
             //TODO display data in gridview, select and replace answer onto empty textbox

@@ -81,10 +81,10 @@
                                         <asp:Label ID="CourseLabel" runat="server" AssociatedControlID="Course">Course:</asp:Label>
                                     </td>
                                     <td>
-                                        <!-- Link with datasource after assessment done -->
-                                        <asp:DropDownList ID="Course" runat="server" DataTextField="Course">
+                                        <asp:DropDownList ID="Course" runat="server" DataTextField="courseName" DataSourceID="SqlDataSource1" DataValueField="courseId">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="CourseRequired" runat="server" ControlToValidate="Course" ErrorMessage="Course is required." ToolTip="Course is required." ValidationGroup="CreateUserWizard1">*</asp:RequiredFieldValidator>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [courseName], [courseId] FROM [Courses]"></asp:SqlDataSource>
                                     </td>
                                 </tr>
                                 <tr>
