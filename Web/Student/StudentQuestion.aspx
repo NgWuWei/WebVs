@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="StudentQuestion.aspx.cs" Inherits="Web.Student.Student" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/AssessmentMenu.Master" AutoEventWireup="true" CodeBehind="StudentQuestion.aspx.cs" Inherits="Web.Student.StudentQuestion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
@@ -9,6 +9,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <div><h1>Assessment Question prepared by tutor</h1></div>
     <asp:Panel runat="server">
+        <!-- repeator to-->
+
 
 
     </asp:Panel>
