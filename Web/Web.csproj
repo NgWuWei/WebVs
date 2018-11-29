@@ -68,14 +68,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
     <Content Include="ChgPass.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Menu.aspx" />
+    <Content Include="Student\StudentAssessment.aspx" />
+    <Content Include="Student\StudentQuestion.aspx" />
+    <Content Include="Student\ViewAssessment.aspx" />
     <Content Include="Tutor\AddGroupDetails.aspx" />
     <Content Include="Tutor\AddMultipleTest.aspx" />
     <Content Include="Tutor\AddTestMenu.aspx" />
     <Content Include="Tutor\AssignTestPart2.aspx" />
+    <Content Include="Tutor\GroupDetails.aspx" />
+    <Content Include="Tutor\TestDetailsMenu.aspx" />
+    <Content Include="WebForm1.aspx" />
     <None Include="picture\1.png" />
     <None Include="picture\2.png" />
     <None Include="picture\3.jpg" />
@@ -99,6 +109,7 @@
     <Content Include="Tutor\Tutor.aspx" />
     <Content Include="Tutor\ViewRecords.aspx" />
     <Content Include="Web.config" />
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssessmentMenu.Master.cs">
@@ -152,6 +163,27 @@
     <Compile Include="Student\Student.aspx.designer.cs">
       <DependentUpon>Student.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentAssessment.aspx.cs">
+      <DependentUpon>StudentAssessment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentAssessment.aspx.designer.cs">
+      <DependentUpon>StudentAssessment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StudentQuestion.aspx.cs">
+      <DependentUpon>StudentQuestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentQuestion.aspx.designer.cs">
+      <DependentUpon>StudentQuestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\ViewAssessment.aspx.cs">
+      <DependentUpon>ViewAssessment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\ViewAssessment.aspx.designer.cs">
+      <DependentUpon>ViewAssessment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tutor\AddGroupDetails.aspx.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -201,6 +233,20 @@
     <Compile Include="Tutor\AssignTestPart2.aspx.designer.cs">
       <DependentUpon>AssignTestPart2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tutor\GroupDetails.aspx.cs">
+      <DependentUpon>GroupDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor\GroupDetails.aspx.designer.cs">
+      <DependentUpon>GroupDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor\TestDetailsMenu.aspx.cs">
+      <DependentUpon>TestDetailsMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor\TestDetailsMenu.aspx.designer.cs">
+      <DependentUpon>TestDetailsMenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tutor\TestMenu.aspx.cs">
       <DependentUpon>TestMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -222,6 +268,13 @@
     <Compile Include="Tutor\ViewRecords.aspx.designer.cs">
       <DependentUpon>ViewRecords.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AssessmentMenu.Master" />
@@ -234,8 +287,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Models\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
