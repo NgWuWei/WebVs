@@ -45,7 +45,6 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
 <div style="float:right">
-        <asp:Button ID="returnbtn" runat="server" Text="Return to test menu" OnClick="returnbtn_Click" />
 </div>
 
     <table id="TestTable" class="auto-style8">  
@@ -74,7 +73,7 @@
         <div>
             
 
-            <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="No"
+            <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="maAnswerID"
                 ShowHeaderWhenEmpty="True"
 
                 OnRowCommand="multiTest_RowCommand"  OnRowEditing="multiTest_RowEditing" OnRowCancelingEdit="multiTest_RowCancelingEdit"
@@ -105,16 +104,20 @@
 
                     <asp:TemplateField HeaderText="Answer No.">
                         <ItemTemplate>
-                            <asp:Label ID="txtmqdAnswerID" Text='<%# Eval("maAnswerID") %>' runat="server"  ></asp:Label>
+                            <asp:Label Text='<%# Eval("maAnswerNo") %>' runat="server" />
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtmqdAnswerID"   runat="server" />
+                            <asp:TextBox ID="txtmqdAnswerID" Text='<%# Eval("maAnswerNo") %>'   runat="server" />
                         </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:TextBox ID="txtmqdAnswerIDFooter" runat="server" />
+                        </FooterTemplate>
              <%--           Text='<%# Eval("mqdAnswerID") %>'--%>
                         
                     </asp:TemplateField>
 
-                     <asp:TemplateField HeaderText="Answer Description">
+                    
+                    <asp:TemplateField HeaderText="Answer Description">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("maAnswerDesc") %>' runat="server" />
                         </ItemTemplate>
@@ -125,7 +128,6 @@
                             <asp:TextBox ID="txtmqdAnswerDescFooter" runat="server" />
                         </FooterTemplate>
                     </asp:TemplateField>
-     
   
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -144,7 +146,7 @@
             </asp:GridView>
             <br />
             <br />
-            <asp:Button ID="savebtn" runat="server" OnClick="savebtn_Click1" Text="Save" />
+        
             <br />
             <br />
 

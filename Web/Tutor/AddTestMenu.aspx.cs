@@ -22,7 +22,8 @@ namespace Web.Tutor
             conn.Open();
          
                 string query = "INSERT INTO Assessments(asName, asQuestionType, asTime, asDueDate) VALUES (@asName, @asQuestionType, @asTime, @asDueDate)";
-                SqlCommand sqlCmd = new SqlCommand(query, conn);
+
+            SqlCommand sqlCmd = new SqlCommand(query, conn);
 
                 sqlCmd.Parameters.AddWithValue("@asName", TextBox1.Text);
                 sqlCmd.Parameters.AddWithValue("@asQuestionType", DropDownList1.SelectedItem.Value);

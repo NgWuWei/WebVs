@@ -10,8 +10,6 @@
     <form id="form1" runat="server">
         <asp:Panel ID="panelLogin" runat="server">
             <h1>Login</h1>
-            <asp:Login ID="Login1" runat="server">
-                <LayoutTemplate>
                     <table style="border-collapse:collapse;">
                         <tr>
                             <td>
@@ -56,8 +54,6 @@
                             </td>
                         </tr>
                     </table>
-                </LayoutTemplate>
-            </asp:Login>
             <div>Dont have an account? Sign up
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Register.aspx">here</asp:HyperLink>
             </div>

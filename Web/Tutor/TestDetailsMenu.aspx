@@ -4,12 +4,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-     <asp:GridView ID="MultiTestView" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="No"
+     <asp:GridView ID="MultiTestView2" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="mqQuestionID"
                 ShowHeaderWhenEmpty="True"
 
-                OnRowCommand="multiTest_RowCommand"  OnRowEditing="multiTest_RowEditing" OnRowCancelingEdit="multiTest_RowCancelingEdit"
-                OnRowUpdating="multiTest_RowUpdating" OnRowDeleting="multiTest_RowDeleting"
-
+               
                 BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" GridLines="Vertical" CssClass="auto-style16" style="margin-left: 159px">
                 <%-- Theme Properties --%>
                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
@@ -35,7 +33,7 @@
 
                     <asp:TemplateField HeaderText="Test Name">
                         <ItemTemplate>
-                            <asp:Label  Text='<%# Eval("asName") %>' runat="server"  ></asp:Label>
+                         <!--   <asp:Label  Text='<%# Eval("asName") %>' runat="server"  ></asp:Label> -->
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="txtasNametxt"   runat="server" />

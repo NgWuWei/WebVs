@@ -13,13 +13,13 @@ namespace Web.Tutor {
     public partial class TestDetailsMenu {
         
         /// <summary>
-        /// MultiTestView control.
+        /// MultiTestView2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MultiTestView;
+        protected global::System.Web.UI.WebControls.GridView MultiTestView2;
         
         /// <summary>
         /// Assignbtn control.

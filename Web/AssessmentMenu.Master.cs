@@ -13,9 +13,10 @@ namespace Web
         {
             // enable this when database is linked
             // HACK disable for testing remember
-            //if (Session["user"] == null) {
-            //    Response.Redirect("~/Login.aspx");
-            //}
+            if (Session["user"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }
