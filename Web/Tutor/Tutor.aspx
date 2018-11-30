@@ -10,11 +10,12 @@
     <div><h1>tutor page
         tutor add question 
          </h1>
-        View profile, 
-
-        Go to assessment, 
-
-        View all student
+        View profile:
+        <asp:Button ID="Button1" runat="server" Text="Button" PostBackUrl="~/Tutor/TutorProfile.aspx" /><br />
+        Assessment Page:
+        <asp:Button ID="Button2" runat="server" Text="Button" PostBackUrl="~/Tutor/Assessment.aspx"/><br />
+        View all student:
+        <asp:Button ID="Button3" runat="server" Text="Button" PostBackUrl="~/Tutor/ViewRecords.aspx"/><br />
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
