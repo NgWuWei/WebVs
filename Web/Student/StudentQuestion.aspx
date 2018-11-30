@@ -8,7 +8,7 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <div><h1>Assessment Question prepared by tutor</h1></div>
-    <asp:Panel runat="server">
+    <asp:Panel ID="Panel1" runat="server">
         <!-- display question with gridview with select, append empty textbox with selected -->
 
         <asp:Table ID="Table1" runat="server">

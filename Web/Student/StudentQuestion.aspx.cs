@@ -30,7 +30,8 @@ namespace Web.Student {
                 // TODO get student ID
                 //insert answer given
                 SqlCommand cmd = new SqlCommand("insert into studentassessments values (stasAnswerGiven, mqQuestionID) values (@stasAns, mqID)", con);
-                cmd.Parameters.AddWithValue("@stasAns", );
+                cmd.Parameters.AddWithValue("@stasAns", QuestionDisplay.Text);
+                cmd.Parameters.AddWithValue("@mqID", Session["user"].ToString());
             }
 
             // if contains same answer
@@ -45,7 +46,7 @@ namespace Web.Student {
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // display select question
+            // UNDONE display questions and update screen
             QuestionDisplay.Text = GridView1.SelectedRow.Cells[1].Text;
         }
 
@@ -55,16 +56,21 @@ namespace Web.Student {
             {
                 // get id from active user
                 // select student
-                SqlCommand cmd = new SqlCommand("select studId from students where studId = ", con);
-                cmd.Parameters.AddWithValue("@id", );
+                SqlCommand cmd = new SqlCommand("select * from students where studI = @id", con);
+                cmd.Parameters.AddWithValue("@id", Session["user"].ToString());
 
                 // if student exist then table shown is more than 0
                 if(cmd.ExecuteNonQuery() >= 0)
                 {
                     cmd.CommandText = "update student set studScore = @tscore where studID = @id";
                     cmd.Parameters.AddWithValue("@tscore", TotalScore);
-                    cmd.Parameters.AddWithValue("@id", );
+                    cmd.Parameters.AddWithValue("@id", Session["user"].ToString());
                     cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    // no student found
+                    Panel1.Controls.Add(new LiteralControl("NO STUDENT FOUND"));
                 }
                 // auto close connection
             }
