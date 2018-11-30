@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0e7b6def3f1f44f793da4d4863d4bf58" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.Assessment" Width="1.5" PointX="4.75" PointY="3.5" />
+        <EntityTypeShape EntityType="Database1Model.Course" Width="1.5" PointX="0.5" PointY="4.625" />
+        <EntityTypeShape EntityType="Database1Model.Group" Width="1.5" PointX="5" PointY="8.625" />
+        <EntityTypeShape EntityType="Database1Model.MultiAnswer" Width="1.5" PointX="9.5" PointY="4.625" />
+        <EntityTypeShape EntityType="Database1Model.MultiQuestion" Width="1.5" PointX="7.25" PointY="4.375" />
+        <EntityTypeShape EntityType="Database1Model.Student" Width="1.5" PointX="2.5" PointY="3.25" />
+        <EntityTypeShape EntityType="Database1Model.Tutor" Width="1.5" PointX="2.75" PointY="0.5" />
+        <AssociationConnector Association="Database1Model.FK__Assessmen__studI__503BEA1C" />
+        <AssociationConnector Association="Database1Model.FK__Assessmen__tutor__29221CFB" />
+        <AssociationConnector Association="Database1Model.FK__MultiQuest__asID__756D6ECB" />
+        <AssociationConnector Association="Database1Model.FK__Students__course__55009F39" />
+        <AssociationConnector Association="Database1Model.FK__Groups__studId__5224328E" />
+        <AssociationConnector Association="Database1Model.FK__MultiAnsw__mqQue__76619304" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

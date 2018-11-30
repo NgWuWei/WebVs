@@ -60,15 +60,15 @@ namespace Web {
                 }
 
                 // insert data
-                cmd.CommandText = "insert into Students (studName, studEmail, studPass, studGender, studBirthdate, studGrade) " +
-                                  "values (@name, @email, @pass, @gender, @birthdate, NULL);";
+                cmd.CommandText = "insert into Students (studName, studEmail, studPass, studGender, studBirthdate, studGrade, courseId) " +
+                                  "values (@name, @email, @pass, @gender, @birthdate, NULL, @course);";
                 // pass in parameters
                 cmd.Parameters.AddWithValue("@name", regName.Text);
                 cmd.Parameters.AddWithValue("@email", regEmail.Text);
                 cmd.Parameters.AddWithValue("@pass", regPass.Text);
                 cmd.Parameters.AddWithValue("@gender", regGender.SelectedValue);
                 cmd.Parameters.AddWithValue("@birthdate", regBirthDate.Text);
-                //cmd.Parameters.AddWithValue("@course", regCourse.SelectedValue);      // TODO LINK Course ID , LINK DATABASE WITH DROPDOWNLIST
+                cmd.Parameters.AddWithValue("@course", regCourse.SelectedValue);      
                 cmd.ExecuteNonQuery();
 
                 // close database
