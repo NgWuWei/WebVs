@@ -22,15 +22,20 @@
                 <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="~/Student/StudentQuestion.aspx?id={0}" Text="Click me"/>
                 <asp:BoundField DataField="asName" HeaderText="Assessment Name" />
                 <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" />
-                <asp:BoundField DataField="totalMarks" HeaderText="Total Marks" />
+                <asp:BoundField DataField="asQuestionType" HeaderText="Question Type" />
                 <asp:BoundField DataField="asTime" HeaderText="Duration" />
                 <asp:BoundField DataField="asDueDate" HeaderText="DeadLine" />
                 <asp:BoundField DataField="totalQuestions" HeaderText="Total Marks" />
+                <asp:BoundField DataField="totalQuestions" HeaderText="Total Question" />
             </Columns>
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT a.asName, a.asDetails, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.asID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId INNER JOIN MultiQuestions AS MQ ON a.asID = MQ.asID GROUP BY a.asName, a.asDetails, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID"></asp:SqlDataSource>
+            SelectCommand="SELECT a.asName, a.asDetails, a.asQuestionType, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.asID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId INNER JOIN MultiQuestions AS MQ ON MQ.asID = a.asID WHERE (s.studId = @id) GROUP BY a.asName, a.asDetails, a.asQuestionType, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID">
+            <SelectParameters>
+                <asp:SessionParameter Name="id" SessionField="user" />
+            </SelectParameters>
+        </asp:SqlDataSource>
 
     </div>
 </asp:Content>

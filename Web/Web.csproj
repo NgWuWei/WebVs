@@ -140,6 +140,7 @@
     </Content>
     <Content Include="Student\EndAssessment.aspx" />
     <Content Include="Student\StudentAssessment.aspx" />
+    <Content Include="Student\StudentProfile.aspx" />
     <Content Include="Student\StudentQuestion.aspx" />
     <Content Include="Student\StudentQuestionChoice.aspx" />
     <Content Include="Student\ViewAssessment.aspx" />
@@ -150,6 +151,7 @@
     <Content Include="Tutor\AssignTestPart2.aspx" />
     <Content Include="Tutor\GroupDetails.aspx" />
     <Content Include="Tutor\TestDetailsMenu.aspx" />
+    <Content Include="Tutor\TutorProfile.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -298,6 +300,13 @@
     <Compile Include="Student\StudentAssessment.aspx.designer.cs">
       <DependentUpon>StudentAssessment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentProfile.aspx.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentProfile.aspx.designer.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Student\StudentQuestion.aspx.cs">
       <DependentUpon>StudentQuestion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -395,6 +404,13 @@
     </Compile>
     <Compile Include="Tutor\Tutor.aspx.designer.cs">
       <DependentUpon>Tutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tutor\TutorProfile.aspx.cs">
+      <DependentUpon>TutorProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor\TutorProfile.aspx.designer.cs">
+      <DependentUpon>TutorProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutor\ViewRecords.aspx.cs">
       <DependentUpon>ViewRecords.aspx</DependentUpon>

@@ -14,8 +14,6 @@
                 <asp:TableCell><p>Question Description: </p></asp:TableCell>
                 <asp:TableCell>
                     <asp:Label ID="QuestionDisplay" runat="server">
-                        <!-- get data from gridview, use datalist -->
-                        <asp:Label runat="server" Text='<%# Eval("mqQuestionDesc")%>'></asp:Label>
                     </asp:Label>
                 </asp:TableCell>
             </asp:TableRow>
@@ -23,11 +21,17 @@
                 <asp:TableCell><p>Answer Here:</p></asp:TableCell>
                 <asp:TableCell>
                     <!-- link with database to get answerDesc-->
-                    <asp:DropDownList ID="ddlAnswer" runat="server">
+                    <asp:DropDownList ID="ddlAnswer" runat="server" DataSourceID="SqlDataSource2">
                     </asp:DropDownList>
+                    
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT ma.maAnswerDesc FROM MultiQuestions AS mq INNER JOIN MultiAnswers AS ma ON mq.mqQuestionID = ma.mqQuestionID WHERE (mq.asID = @id)">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="id" QueryStringField="user" />
+            </SelectParameters>
+        </asp:SqlDataSource>
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         <!-- display test marks for 1 question -->
         <div></div>
