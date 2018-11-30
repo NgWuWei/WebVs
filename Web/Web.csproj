@@ -160,6 +160,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="AssessmentMenu.Master.designer.cs~RF9665944.TMP" />
     <None Include="bin\Web.dll.config" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -168,6 +169,8 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="obj\Release\Web.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Release\Web.csprojAssemblyReference.cache" />
     <None Include="picture\1.png" />
     <None Include="picture\2.png" />
     <None Include="picture\3.jpg" />

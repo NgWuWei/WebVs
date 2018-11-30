@@ -26,26 +26,26 @@ namespace Web {
             connection.Open();
 
             // get tutor
-            SqlCommand cmd = new SqlCommand("select tutId from Tutors where tutId = @tutId", connection);
-            cmd.Parameters.AddWithValue("@tutId", Login1.FindControl("Email").ToString());
+            SqlCommand cmd = new SqlCommand("select tutorID from Tutors where tutorEmail = @tutorEmail", connection);
+            cmd.Parameters.AddWithValue("@tutorEmail", Email.Text);
             isTutor = cmd.ExecuteScalar() as string;
             // get student
-            cmd = new SqlCommand("select studId from Students where studId = @studEmail", connection);
-            cmd.Parameters.AddWithValue("@studId", Login1.FindControl("Email").ToString());
+            cmd = new SqlCommand("select studId from Students where studEmail = @studEmail", connection);
+            cmd.Parameters.AddWithValue("@studEmail", Email.Text);
             isStudent = cmd.ExecuteScalar() as string;
 
             connection.Close();
 
             // direct to respective pages
             if (isTutor != null) {
-                Response.Redirect("~/Tutor/Tutor.aspx");
                 // set this session to this user
                 Session["user"] = isTutor;
-                Session["auth"] = "Tutor"; 
+                Session["auth"] = "Tutor";
+                Response.Redirect("~/Tutor/Tutor.aspx");
             } else if (isStudent != null) {
-                Response.Redirect("~/Student/Student.aspx");
                 Session["user"] = isStudent;
                 Session["auth"] = "Student";
+                Response.Redirect("~/Student/Student.aspx");
             } else {
                 // remove this and replace with error
                 Response.Redirect("~/Login.aspx");
