@@ -24,7 +24,7 @@
         <asp:TextBox ID="txtGroupName" runat="server" style="text-align:center" CssClass="auto-style2"></asp:TextBox>
        
         <br />
-        <asp:Button ID="AddGroupbtn" runat="server" BackColor="#FF3300" ForeColor="White" Text="Create Group"  OnClientClick="javascript:alert('You are now will be directed to the add group page')"   CssClass="auto-style4" />
+        <asp:Button ID="AddGroupbtn" runat="server" BackColor="#FF3300" ForeColor="White" Text="Create Group"  OnClientClick="javascript:alert('You are now will be directed to the add group page')"   CssClass="auto-style4" OnClick="AddGroupbtn_Click" />
       </div>
 </asp:Content>
 

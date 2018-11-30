@@ -28,27 +28,37 @@ namespace Web {
             // get tutor
             SqlCommand cmd = new SqlCommand("select tutorID from Tutors where tutorEmail = @tutorEmail", connection);
             cmd.Parameters.AddWithValue("@tutorEmail", Email.Text);
-            isTutor = cmd.ExecuteScalar() as string;
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    isTutor = reader["tutorID"].ToString();
+
+            }
             // get student
             cmd = new SqlCommand("select studId from Students where studEmail = @studEmail", connection);
             cmd.Parameters.AddWithValue("@studEmail", Email.Text);
-            isStudent = cmd.ExecuteScalar() as string;
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                    isStudent = reader["studID"].ToString();
+
+            }
 
             connection.Close();
 
             // direct to respective pages
-            if (isTutor != null) {
+            if (isTutor != null && isTutor != "") {
                 // set this session to this user
                 Session["user"] = isTutor;
                 Session["auth"] = "Tutor";
                 Response.Redirect("~/Tutor/Tutor.aspx");
-            } else if (isStudent != null) {
+            } else if (isStudent != null && isStudent != "") {
                 Session["user"] = isStudent;
                 Session["auth"] = "Student";
                 Response.Redirect("~/Student/Student.aspx");
             } else {
                 // remove this and replace with error
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Login.aspx", false);
                 // UNDONE sign in fail and display error
             }
         }

@@ -22,15 +22,6 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.Label testnamelbl;
         
         /// <summary>
-        /// questiontypelbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label questiontypelbl;
-        
-        /// <summary>
         /// QuestionNolbl control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace Web.Tutor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label QuestionNolbl;
+        
+        /// <summary>
+        /// returnbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button returnbtn;
         
         /// <summary>
         /// QuestionTxt control.
@@ -67,6 +67,15 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.TextBox Markstxt;
         
         /// <summary>
+        /// confirmbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button confirmbtn;
+        
+        /// <summary>
         /// MultiTestView control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,23 @@ namespace Web.Tutor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView MultiTestView;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// savebtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button savebtn;
     }
 }

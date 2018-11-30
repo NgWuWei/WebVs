@@ -2,6 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            margin-left: 379px;
+            margin-right: 7px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
      <asp:GridView ID="MultiTestView2" runat="server" AutoGenerateColumns="False" ShowFooter="True" DataKeyNames="mqQuestionID"
@@ -82,5 +88,7 @@
             </asp:GridView>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
-    <asp:Button ID="Assignbtn" runat="server" Text="Assign" OnClick="Assignbtn_Click" />
+    <br />
+    <br />
+    <asp:Button ID="Assignbtn" runat="server" Text="Assign" OnClick="Assignbtn_Click" CssClass="auto-style1" Width="54px" />
 </asp:Content>

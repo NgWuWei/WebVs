@@ -30,7 +30,7 @@
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT a.asName, a.asDetails, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.mqQuestionID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studID INNER JOIN MultiQuestions AS MQ ON MQ.asID = a.asID GROUP BY a.asName, a.asDetails, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID"></asp:SqlDataSource>
+            SelectCommand="SELECT a.asName, a.asDetails, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.asID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId INNER JOIN MultiQuestions AS MQ ON a.asID = MQ.asID GROUP BY a.asName, a.asDetails, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID"></asp:SqlDataSource>
 
     </div>
 </asp:Content>
