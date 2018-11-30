@@ -12,7 +12,7 @@ namespace Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MultiAnswers
+    public partial class MultiAnswer
     {
         public int maAnswerID { get; set; }
         public string maAnswerDesc { get; set; }

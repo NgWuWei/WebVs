@@ -17,10 +17,10 @@
             -->
         <!-- assessment id, assessment name and question title the same, question type, question no., due date, timer-->
 
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="~/Student/StudentQuestion.aspx?id={0}" Text="Click me"/>
-                <asp:BoundField DataField="asname" HeaderText="Assessment Name" />
+                <asp:BoundField DataField="asName" HeaderText="Assessment Name" />
                 <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" />
                 <asp:BoundField DataField="totalMarks" HeaderText="Total Marks" />
                 <asp:BoundField DataField="asTime" HeaderText="Duration" />
@@ -30,7 +30,7 @@
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT A.asName, A.asDetails, SUM(MQ.mqEachMarks) AS totalMarks, A.asTime, A.asDueDate, COUNT(MQ.mqQuestionID) AS totalQuestions, MQ.mqQuestionID AS id FROM Students AS S INNER JOIN Groups AS G ON S.studId = G.studId INNER JOIN Assessments AS A ON G.grpId = A.grpId INNER JOIN MultiQuestions AS MQ ON MQ.asID = A.asID GROUP BY A.asName, A.asDetails, A.asTime, A.asDueDate, MQ.mqQuestionID"></asp:SqlDataSource>
+            SelectCommand="SELECT a.asName, a.asDetails, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.mqQuestionID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studID INNER JOIN MultiQuestions AS MQ ON MQ.asID = a.asID GROUP BY a.asName, a.asDetails, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID"></asp:SqlDataSource>
 
     </div>
 </asp:Content>

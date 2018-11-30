@@ -31,13 +31,22 @@ namespace Web.Student {
         protected global::System.Web.UI.WebControls.Label QuestionDisplay;
         
         /// <summary>
-        /// AnswerCell control.
+        /// AnswerText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AnswerCell;
+        protected global::System.Web.UI.WebControls.TextBox AnswerText;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// GridView1 control.

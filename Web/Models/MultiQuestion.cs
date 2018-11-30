@@ -17,7 +17,7 @@ namespace Web.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MultiQuestion()
         {
-            this.MultiAnswers1 = new HashSet<MultiAnswers>();
+            this.MultiAnswers = new HashSet<MultiAnswer>();
         }
     
         public int mqQuestionID { get; set; }
@@ -28,6 +28,6 @@ namespace Web.Models
     
         public virtual Assessment Assessment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MultiAnswers> MultiAnswers1 { get; set; }
+        public virtual ICollection<MultiAnswer> MultiAnswers { get; set; }
     }
 }

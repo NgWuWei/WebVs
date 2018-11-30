@@ -27,10 +27,10 @@ namespace Web.Models
         public Nullable<int> asTotalMarks { get; set; }
         public Nullable<int> asTime { get; set; }
         public string asDueDate { get; set; }
-        public Nullable<int> grpId { get; set; }
+        public Nullable<int> studID { get; set; }
         public Nullable<int> tutorId { get; set; }
     
-        public virtual Group Group { get; set; }
+        public virtual Student Student { get; set; }
         public virtual Tutor Tutor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MultiQuestion> MultiQuestions { get; set; }

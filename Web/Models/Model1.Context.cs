@@ -28,9 +28,9 @@ namespace Web.Models
         public virtual DbSet<Assessment> Assessments { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<MultiAnswer> MultiAnswers { get; set; }
         public virtual DbSet<MultiQuestion> MultiQuestions { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Tutor> Tutors { get; set; }
-        public virtual DbSet<MultiAnswers> MultiAnswers { get; set; }
     }
 }

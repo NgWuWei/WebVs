@@ -24,7 +24,7 @@ namespace Web.Student
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             MultiQuestion mq = new MultiQuestion();
-            MultiAnswers ma = new MultiAnswers();
+            MultiAnswer ma = new MultiAnswer();
 
             if (ma.mqQuestionID == mq.mqQuestionID)
             {

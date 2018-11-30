@@ -22,24 +22,24 @@
                 <asp:TableCell><p>Answer Here:</p></asp:TableCell>
                 <asp:TableCell>
                     <!--Add this after this friday if (Request.QueryString["QType"].ToString() == "Text"); -->
-                    <asp:TextBox ID="AnswerCell" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="AnswerText" runat="server" TextMode="MultiLine"></asp:TextBox>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         <!-- display test marks for 1 question -->
         <div></div>
         <br />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="mqQuestionID" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="mqQuestionDesc" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="asName" HeaderText="Assessment Name" />
                 <asp:BoundField DataField="mqQuestionDesc" HeaderText="Question Details" />
                 <asp:BoundField DataField="mqEachMarks" HeaderText="Question Score" />
-                <asp:BoundField DataField="mqdAnswerDesc" HeaderText="Answer Given" />
+                <asp:BoundField DataField="mqStudentAnswer" HeaderText="Answer Given" />
             </Columns> 
         </asp:GridView>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT A.asName FROM MultiQuestionDetail AS mqd INNER JOIN MultiQuestions AS mq ON mqd.mqQuestionID = mq.mqQuestionID INNER JOIN Assessments AS A ON mq.asID = A.asID WHERE (mq.mqQuestionID = @id)">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT mq.mqQuestionDesc, mq.mqEachMarks FROM Assessments AS a INNER JOIN MultiQuestions AS mq ON a.asID = mq.asID WHERE (mq.asID = @id)">
             <SelectParameters>
                 <asp:QueryStringParameter Name="id" QueryStringField="id" />
             </SelectParameters>

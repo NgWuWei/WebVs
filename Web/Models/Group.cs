@@ -14,20 +14,12 @@ namespace Web.Models
     
     public partial class Group
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Group()
-        {
-            this.Assessments = new HashSet<Assessment>();
-        }
-    
         public int grpId { get; set; }
         public string grpName { get; set; }
         public string grpDesc { get; set; }
         public string grpDate { get; set; }
         public Nullable<int> studId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Assessment> Assessments { get; set; }
         public virtual Student Student { get; set; }
     }
 }
