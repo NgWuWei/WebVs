@@ -18,7 +18,7 @@ namespace Web.Tutor
 
         protected void ceratenewbtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Tutor/AssignTestPart2.aspx");
+            Response.Redirect("~/Tutor/AddGroupMenu.aspx");
         }
     }
 }

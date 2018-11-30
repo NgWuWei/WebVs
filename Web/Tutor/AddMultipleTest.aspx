@@ -31,6 +31,9 @@
         margin-left: 252px;
         margin-top: 54px;
     }
+    .auto-style17 {
+        float:right;
+    }
     </style>
     <br />
     <br />
@@ -38,12 +41,16 @@
 
 
         TEST NAME     :   <asp:Label ID="testnamelbl" runat="server"></asp:Label>
+    <%--<br /><br />
+        QUESTION TYPE :   <asp:Label ID="questiontypelbl" runat="server"></asp:Label>--%>
     <br /><br />
-        QUESTION TYPE :   <asp:Label ID="questiontypelbl" runat="server"></asp:Label>
-    
+        QUESTION NO :       <asp:Label ID="QuestionNolbl" runat="server"></asp:Label>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="tail" runat="server">
+
+    <asp:Button ID="returnbtn" runat="server" CssClass="auto-style17" Text="Return to Test Menu" OnClick="returnbtn_Click" />
+
 <div style="float:right">
 </div>
 
@@ -54,17 +61,17 @@
             </tr>
             <tr>
                 <td class="auto-style10"><br />
-                
-                    <br />
-                    <br />
-                    *QUESTION NO.<br />
-                    <asp:Label ID="QuestionNolbl" runat="server"></asp:Label>
+                    
                 </td>
                 <td class="auto-style11">
                     <asp:TextBox ID="QuestionTxt" runat="server" CssClass="auto-style9" Height="126px" Width="535px"></asp:TextBox>
                     <br />
                     <asp:Label ID="mulquestionResultlbl" runat="server" Text="Please Select the Marks: "></asp:Label>
                     <asp:TextBox ID="Markstxt" TextMode="Number" runat="server" min="1" max="20" step="1"/>
+                    <br />
+
+                    <h2>Confirm to Save Question?</h2>
+                    <asp:Button ID="confirmbtn" runat="server" Text="Confirm" OnClick="confirmbtn_Click" />
                     <br />
 
                 </td>
@@ -146,6 +153,11 @@
             </asp:GridView>
             <br />
             <br />
+            <br />
+        <h3>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+        </h3>
+            <asp:Button ID="savebtn" runat="server" Text="Save " OnClick="savebtn_Click" />
         
             <br />
             <br />

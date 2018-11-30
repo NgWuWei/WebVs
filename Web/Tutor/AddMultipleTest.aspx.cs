@@ -13,12 +13,13 @@ namespace Web.Tutor
     public partial class AddMultipleTest : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        static int j = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                PopulateGridview();
-            }
+
+            testnamelbl.Text = Request.QueryString["name"];
+            QuestionNolbl.Text = j.ToString();
+            //int id = int.Parse(Request.QueryString["id"]);
 
         }
 
@@ -65,15 +66,12 @@ namespace Web.Tutor
                         sqlCmd.Parameters.AddWithValue("@maAnswerDesc", (MultiTestView.FooterRow.FindControl("txtmqdAnswerDescFooter") as TextBox).Text.Trim());
                         sqlCmd.ExecuteNonQuery();
                         PopulateGridview();
-
                     }
                 }
             }
             catch (Exception ex)
             {
-
             }
-
         }
 
         protected void multiTest_RowEditing(object sender, GridViewEditEventArgs e)
@@ -97,8 +95,8 @@ namespace Web.Tutor
                     sqlCon.Open();
                     string query = "UPDATE PhoneBook SET maAnswerNo=@maAnswerNo, maAnswerDesc =@maAnswerDesc WHERE maAnswerID = @maAnswerID";
                     SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                    sqlCmd.Parameters.AddWithValue("@FirstName", (MultiTestView.Rows[e.RowIndex].FindControl("txtFirstName") as TextBox).Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@LastName", (MultiTestView.Rows[e.RowIndex].FindControl("txtLastName") as TextBox).Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@maAnswerNo", (MultiTestView.Rows[e.RowIndex].FindControl("txtmqdAnswerID") as TextBox).Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@maAnswerDesc", (MultiTestView.Rows[e.RowIndex].FindControl("txtmqdAnswerDescName") as TextBox).Text.Trim());
 
                     sqlCmd.Parameters.AddWithValue("@maAnswerID", Convert.ToInt32(MultiTestView.DataKeys[e.RowIndex].Value.ToString()));
                     sqlCmd.ExecuteNonQuery();
@@ -125,7 +123,6 @@ namespace Web.Tutor
                     sqlCmd.Parameters.AddWithValue("@maAnswerID", Convert.ToInt32(MultiTestView.DataKeys[e.RowIndex].Value.ToString()));
                     sqlCmd.ExecuteNonQuery();
                     PopulateGridview();
-                    
                 }
             }
             catch (Exception ex)
@@ -134,6 +131,104 @@ namespace Web.Tutor
             }
         }
 
+
+        protected void confirmbtn_Click(object sender, EventArgs e)
+        {
+            Label1.Text = "Save Before u want to create next question!!! + <br />";
+
+            PopulateGridview();
+            
+
+        }
+        private DataTable GetData()
+        {
+            string connection = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connection))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM MultiQuestions", con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter())
+                    {
+                        da.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            da.Fill(dt);
+                            return dt;
+                        }
+                    }
+                }
+            }
+        }
+        static int totalResult = 0;
+
+
+        protected void savebtn_Click(object sender, EventArgs e)
+        {
+            int result = int.Parse(Markstxt.Text);
+
+            MultiTestView.DataSource = this.GetData();
+
+            foreach (GridViewRow row in MultiTestView.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox cb = (CheckBox)row.FindControl("cbSelect");
+                    if (cb.Checked)
+                    {
+                        Label correctAnswer = (Label)row.FindControl("txtmqdAnswerID");
+
+                        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+                        {
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO MultiQuestions( mqQuestionDesc, maQuestionNo, mqCorrectAnswer, mqQuestionDesc , mqEachMarks) VALUES" +
+                                "(@mqQuestionDesc, @maQuestionNo, @mqCorrectAnswer, @mqQuestionDesc , @mqEachMarks)", con))
+                            {
+                                cmd.Parameters.AddWithValue("@mqCorrectAnswer", (MultiTestView.FooterRow.FindControl("txtmqdAnswerIDFooter") as TextBox).Text.Trim());
+                                cmd.Parameters.AddWithValue("@mqQuestionDesc", QuestionTxt.Text);
+                                cmd.Parameters.AddWithValue("@mqEachMarks", Markstxt.Text);
+                                
+
+                                con.Open();
+                                cmd.ExecuteNonQuery();
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            SqlConnection conn2 = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+            conn2.Open();
+
+            string query2 = "INSERT INTO MultiAnswers( maQuestionNo ) VALUES ( @maQuestionNo, )";
+
+            SqlCommand sqlCmd2 = new SqlCommand(query2, conn2);
+
+            sqlCmd2.Parameters.AddWithValue("@maQuestionNo", QuestionNolbl.Text);
+
+
+            sqlCmd2.ExecuteNonQuery();
+
+
+            QuestionTxt.Text = string.Empty;
+            Markstxt.Text = string.Empty;
+            totalResult =+ result;
+            QuestionTxt.Text = " ";
+            Markstxt.Text = " ";
+
+            MultiTestView.DataSource = null;
+            MultiTestView.DataBind();
+
+            j++;
+
+            Response.Redirect("~/Tutor/AddMultipleTest.aspx");
+        }
+
+
+        protected void returnbtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutor/TestDetailsMenu.aspx");
+        }
     }
 
 

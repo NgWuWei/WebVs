@@ -13,5 +13,10 @@ namespace Web.Tutor
         {
 
         }
+
+        protected void AddGroupbtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Tutor/AddGroupDetails.aspx");
+        }
     }
 }

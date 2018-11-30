@@ -32,7 +32,8 @@ namespace Web.Tutor
 
 
                 sqlCmd.ExecuteNonQuery();
-                Response.Redirect("~/Tutor/AddMultipleTest.aspx");
+            Response.Redirect("~/Tutor/AddMultipleTest.aspx?name=" + TextBox1.Text);
+           
 
 
         }
