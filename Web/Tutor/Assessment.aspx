@@ -7,23 +7,21 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div><h1>TUTOR NAME HERE</h1></div>
+    <div><h1><%# Session["user"].ToString() + Session["name"].ToString() %></h1></div>
     <!--Use full-page tabs-->
     <!--Use css to made these into tabs -->
     <asp:Panel ID="CreatePanel" runat="server">
-        Assessments contain questions
+        Assessments 
     </asp:Panel>
     <asp:Panel ID="ViewPanel" runat="server">
-        Contains all assessment history with question and answer
-        <!-- Before this type assessment details 
-            next to question tab, add more question, auto sum total marks-->
-        <asp:Button ID="btnAdd" runat="server" Text="Add New Question" OnClick="BtnAdd_Click"/>
+        Add assessments
+        <asp:Button runat="server" Text="To Assessment" PostBackUrl="~/Tutor/AddTestMenu.aspx"/>
     </asp:Panel>
     <asp:Panel ID="UpdatePanel" runat="server">
-        Edit and Correct assessment questions
+        Edit and Correct assessment questions (NOT DONE)
     </asp:Panel>
     <asp:Panel ID="DeletePanel" runat="server">
-        Can delete any assessment made
+        Can delete any assessment made (NOT DONE)
     </asp:Panel>
     <asp:Panel ID="ViewRecords" runat="server">
         <asp:HyperLink runat="server" NavigateUrl="~/Tutor/ViewRecords.aspx">View Students Data</asp:HyperLink>

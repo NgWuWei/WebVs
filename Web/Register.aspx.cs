@@ -23,7 +23,7 @@ namespace Web {
         protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e) {
             // error when creating account
             Literal errMsg = (Literal)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("ErrorMessage");
-            
+            // UNDONE enable regex validator 
             // initialize register value
             TextBox regName = (TextBox)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("UserName");
             TextBox regEmail = (TextBox)this.CreateUserWizardStep1.ContentTemplateContainer.FindControl("Email");
@@ -48,7 +48,7 @@ namespace Web {
                 
                 // count table to check table is empty
                 cmd.CommandText = "select count(*) from Students";
-                if (Convert.ToInt32(cmd.ExecuteScalar()) == 0) {
+                if (Convert.ToInt32(cmd.ExecuteScalar()) <= 0) {
                     // create custom id out of birthdate eg 19 00000
                     int regId = Math.Abs((Int32.Parse(regBirthDate.Text.Substring(8, 2)) * 100000) + Convert.ToInt32(cmd.ExecuteScalar()));
                     // insert unique id before insert data
@@ -69,12 +69,13 @@ namespace Web {
                 cmd.Parameters.AddWithValue("@gender", regGender.SelectedValue);
                 cmd.Parameters.AddWithValue("@birthdate", regBirthDate.Text);
                 cmd.Parameters.AddWithValue("@course", regCourse.SelectedValue);      
-                cmd.ExecuteNonQuery();
+                int ad = cmd.ExecuteNonQuery();
 
                 // close database
                 connection.Close();
-            } catch {
+            } catch(Exception ex) {
                 errMsg.Text += "Error occur! Reload the page and try again";
+                Console.Write(ex);
             }
             /**TODO 1. force user to enter only integer in asp:textbox
                    2. set new user into database
