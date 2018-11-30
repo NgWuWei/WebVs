@@ -15,33 +15,37 @@ namespace Web {
 
         protected void LoginButton_Click(object sender, EventArgs e) {
             // reset both to empty
-            string isTutor = "";
-            string isStudent = "";
+            string isTutor = "", isStudent = "";
+            string userName = "";
 
             // match user ID to see if valid
             string str = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            //string str = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\GitHub\Web\Web\App_Data\Database1.mdf;Integrated Security=True";
             SqlConnection connection = new SqlConnection(str);
             // open connection
             connection.Open();
 
             // get tutor
-            SqlCommand cmd = new SqlCommand("select tutorID from Tutors where tutorEmail = @tutorEmail", connection);
+            SqlCommand cmd = new SqlCommand("select tutorID, tutorName from Tutors where tutorEmail = @tutorEmail", connection);
             cmd.Parameters.AddWithValue("@tutorEmail", Email.Text);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
+                {
                     isTutor = reader["tutorID"].ToString();
+                    userName = reader["tutorName"].ToString();
+                }
 
             }
             // get student
-            cmd = new SqlCommand("select studId from Students where studEmail = @studEmail", connection);
+            cmd = new SqlCommand("select studId, studName from Students where studEmail = @studEmail", connection);
             cmd.Parameters.AddWithValue("@studEmail", Email.Text);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
+                {
                     isStudent = reader["studID"].ToString();
-
+                    userName = reader["studName"].ToString();
+                }
             }
 
             connection.Close();
@@ -51,10 +55,12 @@ namespace Web {
                 // set this session to this user
                 Session["user"] = isTutor;
                 Session["auth"] = "Tutor";
+                Session["name"] = userName;
                 Response.Redirect("~/Tutor/Tutor.aspx");
             } else if (isStudent != null && isStudent != "") {
                 Session["user"] = isStudent;
                 Session["auth"] = "Student";
+                Session["name"] = userName;
                 Response.Redirect("~/Student/Student.aspx");
             } else {
                 // remove this and replace with error

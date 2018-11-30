@@ -80,9 +80,6 @@
     <Content Include="App_Data\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
-    <Content Include="Assessment\Exam.aspx" />
-    <Content Include="Assessment\ExamBegin.aspx" />
-    <Content Include="Assessment\FinalResult.aspx" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
     <Content Include="bin\EntityFramework.SqlServer.xml" />
@@ -130,6 +127,7 @@
     <Content Include="ChgPass.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="Mainpage.aspx" />
     <Content Include="Menu.aspx" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -143,19 +141,18 @@
     </Content>
     <Content Include="Student\EndAssessment.aspx" />
     <Content Include="Student\StudentAssessment.aspx" />
+    <Content Include="Student\StudentProfile.aspx" />
     <Content Include="Student\StudentQuestion.aspx" />
     <Content Include="Student\StudentQuestionChoice.aspx" />
     <Content Include="Student\ViewAssessment.aspx" />
     <Content Include="Tutor\AddGroupDetails.aspx" />
     <Content Include="Tutor\AddGroupMenu.aspx" />
     <Content Include="Tutor\AddMultipleTest.aspx" />
-    <Content Include="Tutor\AddTest.aspx" />
     <Content Include="Tutor\AddTestMenu.aspx" />
     <Content Include="Tutor\AssignTestPart2.aspx" />
-    <Content Include="Tutor\CheckQuestion.aspx" />
-    <Content Include="Tutor\CheckStudentResult.aspx" />
     <Content Include="Tutor\GroupDetails.aspx" />
     <Content Include="Tutor\TestDetailsMenu.aspx" />
+    <Content Include="Tutor\TutorProfile.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -202,35 +199,12 @@
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\GlobalConnection.cs" />
-    <Compile Include="Answer\Answer.cs" />
     <Compile Include="AssessmentMenu.Master.cs">
       <DependentUpon>AssessmentMenu.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AssessmentMenu.Master.designer.cs">
       <DependentUpon>AssessmentMenu.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Assessment\Exam.aspx.cs">
-      <DependentUpon>Exam.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Assessment\Exam.aspx.designer.cs">
-      <DependentUpon>Exam.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Assessment\ExamBegin.aspx.cs">
-      <DependentUpon>ExamBegin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Assessment\ExamBegin.aspx.designer.cs">
-      <DependentUpon>ExamBegin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Assessment\FinalResult.aspx.cs">
-      <DependentUpon>FinalResult.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Assessment\FinalResult.aspx.designer.cs">
-      <DependentUpon>FinalResult.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChgPass.aspx.cs">
       <DependentUpon>ChgPass.aspx</DependentUpon>
@@ -248,6 +222,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mainpage.aspx.cs">
+      <DependentUpon>Mainpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mainpage.aspx.designer.cs">
+      <DependentUpon>Mainpage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
@@ -327,6 +308,13 @@
     <Compile Include="Student\StudentAssessment.aspx.designer.cs">
       <DependentUpon>StudentAssessment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Student\StudentProfile.aspx.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentProfile.aspx.designer.cs">
+      <DependentUpon>StudentProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Student\StudentQuestion.aspx.cs">
       <DependentUpon>StudentQuestion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -350,6 +338,7 @@
     </Compile>
     <Compile Include="Tutor\AddGroupDetails.aspx.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Tutor\AddGroupDetails.aspx.designer.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>
@@ -367,13 +356,6 @@
     </Compile>
     <Compile Include="Tutor\AddMultipleTest.aspx.designer.cs">
       <DependentUpon>AddMultipleTest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Tutor\AddTest.aspx.cs">
-      <DependentUpon>AddTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Tutor\AddTest.aspx.designer.cs">
-      <DependentUpon>AddTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tutor\AddTestMenu.aspx.cs">
       <DependentUpon>AddTestMenu.aspx</DependentUpon>
@@ -403,20 +385,6 @@
     <Compile Include="Tutor\AssignTestPart2.aspx.designer.cs">
       <DependentUpon>AssignTestPart2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Tutor\CheckQuestion.aspx.cs">
-      <DependentUpon>CheckQuestion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Tutor\CheckQuestion.aspx.designer.cs">
-      <DependentUpon>CheckQuestion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Tutor\CheckStudentResult.aspx.cs">
-      <DependentUpon>CheckStudentResult.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Tutor\CheckStudentResult.aspx.designer.cs">
-      <DependentUpon>CheckStudentResult.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Tutor\GroupDetails.aspx.cs">
       <DependentUpon>GroupDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -445,6 +413,13 @@
     <Compile Include="Tutor\Tutor.aspx.designer.cs">
       <DependentUpon>Tutor.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tutor\TutorProfile.aspx.cs">
+      <DependentUpon>TutorProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tutor\TutorProfile.aspx.designer.cs">
+      <DependentUpon>TutorProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tutor\ViewRecords.aspx.cs">
       <DependentUpon>ViewRecords.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -471,7 +446,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

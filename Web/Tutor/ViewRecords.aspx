@@ -4,48 +4,45 @@
  <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
  <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div><h1>View Student Records
+     <div><h1>View Student Records
          </h1>
     </div>
     <div>
-         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="assessId">
+         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="studID">
             <Columns>
-                <asp:BoundField DataField="studId" HeaderText="student ID" SortExpression="studId" />
-                <asp:BoundField DataField="studName" HeaderText="student Name" ReadOnly="True" SortExpression="studName" />
-                <asp:BoundField DataField="studGrade" HeaderText="student Grade" SortExpression="studGrade" />
-                <asp:BoundField DataField="assessTitle" HeaderText="assessTitle" SortExpression="assessTitle" />
-                <asp:BoundField DataField="assessDetail" HeaderText="assessDetail" SortExpression="assessDetail" />
+                <asp:CommandField ShowSelectButton="True" />
+                <asp:DynamicField DataField="studID" HeaderText="Student ID" />
+                <asp:DynamicField DataField="studName" HeaderText="Student Name" />
+                <asp:DynamicField DataField="studGrade" HeaderText="Student Grade" />
+                <asp:DynamicField DataField="asName" HeaderText="Assessment Name" />
+                <asp:DynamicField DataField="asDetails" HeaderText="Assessment Details" />
             </Columns>
         </asp:GridView>
-         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT a.studId, s.studName, s.studGrade, a.assessTitle, assessDetail, a.assessId FROM Students AS s INNER JOIN Assessments AS a ON s.studId = a.studId AND s.assessId = a.assessId"></asp:SqlDataSource>
+         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT s.studId, s.studName, s.studGrade, a.asID, a.asName, a.asDetails, sa.stasScore FROM Students AS s INNER JOIN Assessments AS a ON s.studId = a.studID INNER JOIN StudentAssessments AS sa ON s.studId = sa.studID"></asp:SqlDataSource>
+         Edit Student Grades: <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
      </div>
     <div>
-         <asp:DataList ID="DataList1" runat="server" DataKeyField="assessId" DataSourceID="SqlDataSource2">
+         <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
             <ItemTemplate>
-                assessId:
-                <asp:Label ID="assessIdLabel" runat="server" Text='<%# Eval("assessId") %>' />
+                asName:
+                <asp:Label ID="asNameLabel" runat="server" Text='<%# Eval("asName") %>' />
                 <br />
-                assessTitle:
-                <asp:Label ID="assessTitleLabel" runat="server" Text='<%# Eval("assessTitle") %>' />
+                mqQuestionDesc:
+                <asp:Label ID="mqQuestionDescLabel" runat="server" Text='<%# Eval("mqQuestionDesc") %>' />
                 <br />
-                assessDetail:
-                <asp:Label ID="assessDetailLabel" runat="server" Text='<%# Eval("assessDetail") %>' />
+                mqCorrectAnswer:
+                <asp:Label ID="mqCorrectAnswerLabel" runat="server" Text='<%# Eval("mqCorrectAnswer") %>' />
                 <br />
-                questionTitle:
-                <asp:Label ID="questionTitleLabel" runat="server" Text='<%# Eval("questionTitle") %>' />
+                stasScore:
+                <asp:Label ID="stasScoreLabel" runat="server" Text='<%# Eval("stasScore") %>' />
                 <br />
-                questionDetail:
-                <asp:Label ID="questionDetailLabel" runat="server" Text='<%# Eval("questionDetail") %>' />
                 <br />
-                ansDetail:
-                <asp:Label ID="ansDetailLabel" runat="server" Text='<%# Eval("ansDetail") %>' />
-                <br />
-<br />
             </ItemTemplate>
         </asp:DataList>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT a.assessId, a.assessTitle, a.assessDetail, q.questionTitle, q.questionDetail, an.ansDetail FROM Assessments AS a INNER JOIN Questions AS q ON a.questionId = q.questionId INNER JOIN Answers AS an ON q.ansId = an.ansId WHERE (a.assessId = @assessId)">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT a.asName, mq.mqQuestionDesc, mq.mqCorrectAnswer, sa.stasScore FROM Students AS s INNER JOIN StudentAssessments AS sa ON s.studId = sa.studID INNER JOIN MultiQuestions AS mq ON sa.mqQuestionID = mq.mqQuestionID INNER JOIN Assessments AS a ON a.asID = mq.asID WHERE (s.studId = @studid) AND (a.asID = @asid)">
             <SelectParameters>
-                <asp:ControlParameter ControlID="GridView1" Name="assessId" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="DataList1" Name="studid" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="DataList1" Name="asid" PropertyName="SelectedValue" />
             </SelectParameters>
         </asp:SqlDataSource>
      </div>
