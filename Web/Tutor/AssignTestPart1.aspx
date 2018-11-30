@@ -13,12 +13,15 @@
                 <br />
                 <asp:CheckBoxList ID="GroupCBL" runat="server"></asp:CheckBoxList>
                 <br />
-                <h3>2) Pre-set settings  : </h3>
-                <br />
-                <asp:Button ID="nextbtn" runat="server"  style="margin-left:10%" Text="Next" />
-                <br />
                 <hr />
+                <h3>2) Available For Eveyone</h3>
                 <br />
+                
+                <br />
+                <div>
+                    <asp:Button ID="nextbtn" runat="server" Text="Next" OnClick="nextbtn_Click" />
+                </div>
+                 <hr />
                 <div>>
                     <asp:Button ID="ceratenewbtn" runat="server" Text="Create New Group" OnClick="ceratenewbtn_Click" />
                 </div>

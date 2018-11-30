@@ -10,16 +10,7 @@
 namespace Web.Tutor {
     
     
-    public partial class AddGroupDetails {
-        
-        /// <summary>
-        /// groupNamelbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label groupNamelbl;
+    public partial class CheckStudentResult {
         
         /// <summary>
         /// GridView1 control.
@@ -29,15 +20,6 @@ namespace Web.Tutor {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
-        
-        /// <summary>
-        /// GroupConfirmbtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GroupConfirmbtn;
         
         /// <summary>
         /// SqlDataSource1 control.

@@ -20,5 +20,10 @@ namespace Web.Tutor
         {
             Response.Redirect("~/Tutor/AddGroupMenu.aspx");
         }
+
+        protected void nextbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

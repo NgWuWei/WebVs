@@ -7,17 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Web.Tutor
 {
-    public partial class AddGroupMenu : System.Web.UI.Page
+    public partial class CheckQuestion : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void AddGroupbtn_Click(object sender, EventArgs e)
-        {
-
-            Response.Redirect("~/Tutor/AddGroupDetails.aspx?Gname=" + txtGroupName.Text);
         }
     }
 }

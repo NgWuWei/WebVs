@@ -10,16 +10,25 @@
 namespace Web.Tutor {
     
     
-    public partial class AddGroupDetails {
+    public partial class CheckQuestion {
         
         /// <summary>
-        /// groupNamelbl control.
+        /// ddlExam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label groupNamelbl;
+        protected global::System.Web.UI.WebControls.DropDownList ddlExam;
+        
+        /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
         /// GridView1 control.
@@ -31,21 +40,12 @@ namespace Web.Tutor {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// GroupConfirmbtn control.
+        /// SqlDataSource2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GroupConfirmbtn;
-        
-        /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
     }
 }
