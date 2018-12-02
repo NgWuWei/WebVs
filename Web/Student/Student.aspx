@@ -7,7 +7,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div><h1>Student
+    <div><h1>Hello <% Session["name"].ToString(); %>
          </h1></div>
     <div>
         <asp:HyperLink runat="server" NavigateUrl="~/Student/StudentAssessment.aspx">Check Assessments</asp:HyperLink>

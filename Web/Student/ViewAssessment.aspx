@@ -12,17 +12,18 @@
         <!-- Get student name , assessment name, student score -->
         <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False">
             <Columns>
-                <asp:BoundField DataField="asname" HeaderText="Assessment Name" />
-                <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" />
-                <asp:BoundField DataField="asQuestionType" HeaderText="Question Type" />
-                <asp:BoundField DataField="asTime" HeaderText="Duration" />
-                <asp:BoundField DataField="asDueDate" HeaderText="DeadLine" />
-                <asp:BoundField DataField="totalQuestions" HeaderText="Total Marks" />
+                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="asName" HeaderText="Assessment Name" SortExpression="asName" />
+                <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" SortExpression="asDetails" />
+                <asp:BoundField DataField="asQuestionType" HeaderText="Question Type" SortExpression="asQuestionType" />
+                <asp:BoundField DataField="asTime" HeaderText="Duration" SortExpression="asTime" />
+                <asp:BoundField DataField="asDueDate" HeaderText="Deadline" SortExpression="asDueDate" />
+                <asp:BoundField DataField="asTotalMarks" HeaderText="Result" SortExpression="asTotalMarks" />
             </Columns>
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT a.asName, a.asDetails, a.asQuestionType, a.asTime, a.asDueDate, sa.stasScore FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId INNER JOIN StudentAssessments AS sa ON s.studId = sa.studID WHERE (s.studId = @id)">
+            SelectCommand="SELECT asName, asDetails, asQuestionType, asTime, asDueDate, asTotalMarks FROM Assessments AS a WHERE (studID = @id)">
             <SelectParameters>
                 <asp:SessionParameter Name="id" SessionField="user" />
             </SelectParameters>

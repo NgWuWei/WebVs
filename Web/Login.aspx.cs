@@ -10,7 +10,8 @@ using System.Web.UI.WebControls;
 namespace Web {
     public partial class Login : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-
+            if (Session["user"] != null)
+                Response.Redirect("~/Mainpage.aspx");
         }
 
         protected void LoginButton_Click(object sender, EventArgs e) {
@@ -19,36 +20,44 @@ namespace Web {
             string userName = "";
 
             // match user ID to see if valid
-            string str = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            SqlConnection connection = new SqlConnection(str);
-            // open connection
-            connection.Open();
-
-            // get tutor
-            SqlCommand cmd = new SqlCommand("select tutorID, tutorName from Tutors where tutorEmail = @tutorEmail", connection);
-            cmd.Parameters.AddWithValue("@tutorEmail", Email.Text);
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
-                if (reader.Read())
-                {
-                    isTutor = reader["tutorID"].ToString();
-                    userName = reader["tutorName"].ToString();
-                }
+                // open connection
+                connection.Open();
 
-            }
-            // get student
-            cmd = new SqlCommand("select studId, studName from Students where studEmail = @studEmail", connection);
-            cmd.Parameters.AddWithValue("@studEmail", Email.Text);
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                if (reader.Read())
+                // get tutor
+                SqlCommand cmd = new SqlCommand("select tutorID, tutorName from Tutors where tutorEmail = @tutorEmail and tutorPass = @tutorPass", connection);
+                cmd.Parameters.AddWithValue("@tutorEmail", Email.Text);
+                cmd.Parameters.AddWithValue("@tutorPass", Password.Text);
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    isStudent = reader["studID"].ToString();
-                    userName = reader["studName"].ToString();
+                    if (reader.Read())
+                    {
+                        isTutor = reader["tutorID"].ToString();
+                        userName = reader["tutorName"].ToString();
+                    }
                 }
-            }
+                // clear var
+                cmd.Parameters.Clear();
 
-            connection.Close();
+                // if its not tutor then search student
+                if (isTutor == null || isTutor == "")
+                {
+                    // get student
+                    cmd = new SqlCommand("select studId, studName from Students where studEmail = @studEmail and studPass = @studPass", connection);
+                    cmd.Parameters.AddWithValue("@studEmail", Email.Text);
+                    cmd.Parameters.AddWithValue("@studPass", Password.Text);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            isStudent = reader["studID"].ToString();
+                            userName = reader["studName"].ToString();
+                        }
+                    }
+                }
+                cmd.Parameters.Clear();
+            }
 
             // direct to respective pages
             if (isTutor != null && isTutor != "") {
@@ -63,7 +72,6 @@ namespace Web {
                 Session["name"] = userName;
                 Response.Redirect("~/Student/Student.aspx");
             } else {
-                // remove this and replace with error
                 Response.Redirect("~/Login.aspx", false);
                 // UNDONE sign in fail and display error
             }

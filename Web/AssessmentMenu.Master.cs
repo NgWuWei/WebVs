@@ -17,6 +17,7 @@ namespace Web
             //{
             //    Response.Redirect("~/Login.aspx");
             //}
+            //if(PathDirection.CurrentToRoot.Equals(""))
         }
     }
 }

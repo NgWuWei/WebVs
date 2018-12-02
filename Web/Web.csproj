@@ -143,7 +143,6 @@
     <Content Include="Student\StudentAssessment.aspx" />
     <Content Include="Student\StudentProfile.aspx" />
     <Content Include="Student\StudentQuestion.aspx" />
-    <Content Include="Student\StudentQuestionChoice.aspx" />
     <Content Include="Student\ViewAssessment.aspx" />
     <Content Include="Tutor\AddGroupDetails.aspx" />
     <Content Include="Tutor\AddGroupMenu.aspx" />
@@ -322,13 +321,6 @@
     <Compile Include="Student\StudentQuestion.aspx.designer.cs">
       <DependentUpon>StudentQuestion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Student\StudentQuestionChoice.aspx.cs">
-      <DependentUpon>StudentQuestionChoice.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Student\StudentQuestionChoice.aspx.designer.cs">
-      <DependentUpon>StudentQuestionChoice.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Student\ViewAssessment.aspx.cs">
       <DependentUpon>ViewAssessment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -338,7 +330,6 @@
     </Compile>
     <Compile Include="Tutor\AddGroupDetails.aspx.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Tutor\AddGroupDetails.aspx.designer.cs">
       <DependentUpon>AddGroupDetails.aspx</DependentUpon>

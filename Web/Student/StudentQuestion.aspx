@@ -9,66 +9,40 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
     <div><h1>Assessment Question prepared by tutor</h1></div>
     <asp:Panel ID="Panel1" runat="server">
-        <!-- display question with gridview with select, append empty textbox with selected -->
-
-        <asp:Table ID="Table1" runat="server">
-            <asp:TableRow>
-                <asp:TableCell><p>Question Description: </p></asp:TableCell>
-                <asp:TableCell>
-                    <asp:Label ID="QuestionDisplay" runat="server"></asp:Label>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell><p>Answer Here:</p></asp:TableCell>
-                <asp:TableCell>
-                    <!--Add this after this friday if (Request.QueryString["QType"].ToString() == "Text"); -->
-                    <asp:TextBox ID="AnswerText" runat="server" TextMode="MultiLine"></asp:TextBox>
-                </asp:TableCell>
-            </asp:TableRow>
-        </asp:Table>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Set as Answer" />
-        <!-- display test marks for 1 question -->
         <div>
-            <table>
-                <tr>
-                    <td>
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="mqQuestionID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                            <Columns>
-                                <asp:CommandField ShowSelectButton="True" />
-                                <asp:BoundField DataField="mqQuestionDesc" HeaderText="Question Details" />
-                                <asp:BoundField DataField="mqEachMarks" HeaderText="Question Score" />
-                                <asp:BoundField DataField="mqQuestionID" HeaderText="Question ID" />
-                            </Columns>
-                        </asp:GridView>
-                        l;l<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT mq.mqQuestionDesc, mq.mqEachMarks, mq.mqQuestionID FROM Assessments AS a INNER JOIN MultiQuestions AS mq ON a.asID = mq.asID WHERE (mq.asID = @id)">
-                            <SelectParameters>
-                                <asp:QueryStringParameter Name="id" QueryStringField="id" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </td>
-                    <td>
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" >
-                            <Columns>
-                                <asp:BoundField DataField="stasAnswerGiven" HeaderText="Answers" />
-                            </Columns>
-                        </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="select stasAnswerGiven from studentassessments sa where studid = @id and mqQuestionid=@mqQuestionid">
-                            <SelectParameters>
-                                <asp:SessionParameter Name="id" SessionField="user" />
-                                <asp:ControlParameter ControlID="GridView1" Name="mqQuestionid" PropertyName="SelectedValue" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>
-                    </td>
-                </tr>
-            </table>
+            <!-- soon add if else for different question TYPE -->
+            <asp:DataList ID="DataList1" runat="server" DataKeyField="mqQuestionID" DataSourceID="SqlDataSource1">
+                <ItemTemplate>
+                    <asp:Label ID="lblID" runat="server" Text='<%# Eval("mqQuestionId") %>'></asp:Label>
+                    <br />Question No. <%# Container.ItemIndex+1 %>
+                    <!-- Get question Description here -->
+                    <%# Eval("mqQuestionDesc") %>
+                    <br /> 
+                    <!-- Radio list here -->
+                    <asp:RadioButton ID="maAnswerA" runat="server" Text='<%# "A) " + Eval("maAnswerA") %>' GroupName="qList"/><br />
+                    <asp:RadioButton ID="maAnswerB" runat="server" Text='<%# "B) " + Eval("maAnswerB") %>' GroupName="qList"/><br />
+                    <asp:RadioButton ID="maAnswerC" runat="server" Text='<%# "C) " + Eval("maAnswerC") %>' GroupName="qList"/><br />
+                    <asp:RadioButton ID="maAnswerD" runat="server" Text='<%# "D) " + Eval("maAnswerD") %>' GroupName="qList"/><br />
+                    Marks: <asp:Label ID="lblMarks" runat="server" Text='<%# Eval("mqEachMarks") %>'></asp:Label>
+                    
+                    <asp:RadioButtonList ID="RadioButtonList1" runat="server"></asp:RadioButtonList>
+                </ItemTemplate>
+            </asp:DataList>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT mq.mqQuestionID, mq.mqQuestionDesc, mq.mqEachMarks, ma.maAnswerA, ma.maAnswerB, ma.maAnswerC, ma.maAnswerD FROM MultiQuestions AS mq INNER JOIN MultiAnswers AS ma ON mq.mqQuestionID = ma.mqQuestionID WHERE (mq.asID = @id)">
+                <SelectParameters>
+                    <asp:QueryStringParameter Name="id" QueryStringField="id" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
         </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
         <br />
 
 
-
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit Test" OnClick="BtnSubmit_Click"/>
         <br /><br />
-        <asp:Button ID="Button2" runat="server" Text="To homepage" PostBackUrl="~/Student/Student.aspx"/>
+        <div>
+            <asp:Button ID="Button2" runat="server" Text="To homepage" PostBackUrl="~/Student/Student.aspx"/>
+        </div>
 
     </asp:Panel>
 </asp:Content>

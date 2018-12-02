@@ -17,21 +17,25 @@
             -->
         <!-- assessment id, assessment name and question title the same, question type, question no., due date, timer-->
 
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="id" OnRowCommand="GridView1_RowCommand">
             <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="~/Student/StudentQuestion.aspx?id={0}" Text="Click me"/>
-                <asp:BoundField DataField="asName" HeaderText="Assessment Name" />
-                <asp:BoundField DataField="asDetails" HeaderText="Assessment Details" />
-                <asp:BoundField DataField="asQuestionType" HeaderText="Question Type" />
-                <asp:BoundField DataField="asTime" HeaderText="Duration" />
-                <asp:BoundField DataField="asDueDate" HeaderText="DeadLine" />
-                <asp:BoundField DataField="totalQuestions" HeaderText="Total Marks" />
-                <asp:BoundField DataField="totalQuestions" HeaderText="Total Question" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton CommandArgument='<%# Eval("id") %>' runat="server" Text="Click here"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="asName" HeaderText="asName" SortExpression="asName" />
+                <asp:BoundField DataField="asDetails" HeaderText="asDetails" SortExpression="asDetails" />
+                <asp:BoundField DataField="asQuestionType" HeaderText="asQuestionType" SortExpression="asQuestionType" />
+                <asp:BoundField DataField="totalMarks" HeaderText="totalMarks" ReadOnly="True" SortExpression="totalMarks" />
+                <asp:BoundField DataField="asTime" HeaderText="asTime" SortExpression="asTime" />
+                <asp:BoundField DataField="asDueDate" HeaderText="asDueDate" SortExpression="asDueDate" />
+                <asp:BoundField DataField="totalQuestion" HeaderText="totalQuestion" ReadOnly="True" SortExpression="totalQuestion" />
             </Columns>
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT a.asName, a.asDetails, a.asQuestionType, SUM(MQ.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, COUNT(MQ.asID) AS totalQuestions, MQ.asID AS id FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId INNER JOIN MultiQuestions AS MQ ON MQ.asID = a.asID WHERE (s.studId = @id) GROUP BY a.asName, a.asDetails, a.asQuestionType, a.asTime, a.asDueDate, MQ.mqQuestionID, MQ.asID">
+            SelectCommand="SELECT a.asName, a.asDetails, a.asQuestionType, SUM(mq.mqEachMarks) AS totalMarks, a.asTime, a.asDueDate, a.asID AS id, COUNT(mq.asID) AS totalQuestion FROM Assessments AS a INNER JOIN Students AS s ON a.studID = s.studId CROSS JOIN MultiQuestions AS mq WHERE (s.studId = @id) GROUP BY a.asName, a.asDetails, a.asQuestionType, a.asTime, a.asDueDate, a.asID">
             <SelectParameters>
                 <asp:SessionParameter Name="id" SessionField="user" />
             </SelectParameters>
